@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy - Drawing Master</title>
+<style>
+  :root{--brand:#FF5C7C;--ink:#2b2b38;--mut:#6b6b7b;--line:#ececf2;--bg:#f7f8fc}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.75}
+  .wrap{max-width:760px;margin:0 auto;padding:48px 22px 80px}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:34px}
+  .brand .m{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#FF5C7C,#FF8A65);display:grid;place-items:center;color:#fff;font-size:22px}
+  .brand b{font-size:19px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:36px 34px;box-shadow:0 10px 40px rgba(40,40,80,.05)}
+  h1{font-size:28px;margin:0 0 4px}
+  .date{color:var(--mut);font-size:13px;margin-bottom:26px}
+  h2{font-size:17px;margin:26px 0 8px;color:var(--ink)}
+  p,li{font-size:14.5px;color:#4a4a5a}
+  ul{padding-left:22px;margin:8px 0}
+  li{margin-bottom:6px}
+  a{color:var(--brand)}
+  .hi{background:#fff5f7;border-left:4px solid var(--brand);padding:14px 18px;border-radius:10px;margin:16px 0;font-weight:600;color:#b8304f}
+  .foot{text-align:center;color:var(--mut);font-size:12px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand"><div class="m">🎨</div><b>Drawing Master</b></div>
+  <div class="card">
+    <h1>Privacy Policy</h1>
+    <div class="date">Last updated: <span id="y"></span>-01-01</div>
+
+    <p>Drawing Master ("we", "the App") is a creative drawing and art-learning tool designed for children and families. We take children’s privacy extremely seriously. This policy explains, in plain language, what the App does with data.</p>
+
+    <div class="hi">We collect no personal data, show no ads, use no trackers, and nothing you draw ever leaves your device. The App works fully offline.</div>
+
+    <h2>1. What stays on your device</h2>
+    <p>The App saves your learning progress and saved artworks in your browser’s local storage (<code>localStorage</code>) on your own device, including completed lessons, saved artworks (compressed images), experience points, levels, and badges. This information is never transmitted to us or any server. You can delete it anytime by clearing your browser’s site data.</p>
+
+    <h2>2. No accounts, no personal information</h2>
+    <p>Children do not need to enter a name, email, birthday, or any other personal information. We do not ask for, receive, or store a child’s personal information. We do not use photos, microphones, cameras, or location.</p>
+
+    <h2>3. No advertising, no third-party SDKs</h2>
+    <p>The App contains no advertising, no advertising identifiers, no behavioral tracking, no analytics frameworks, and no third-party tracking SDKs. We do not sell or share any data with third parties, and we do not use any data for targeted advertising.</p>
+
+    <h2>4. Open-source algorithms, on-device</h2>
+    <p>The AI Helper features (line-art extraction, color analysis, composition analysis, smart palettes, and artwork scoring) use classic open-source computer-vision ideas that run entirely in your browser. Images processed in these features are never uploaded anywhere.</p>
+
+    <h2>5. Internet access</h2>
+    <p>The App needs no internet connection and makes no network requests. All code, styles, and algorithms are bundled into a single file.</p>
+
+    <h2>6. Parents and guardians</h2>
+    <p>If you are a parent or guardian with any question, please contact us below. Because we collect no personal data, there is nothing for us to review, delete, or disclose — your family’s data stays entirely on your device, under your control.</p>
+
+    <h2>7. Compliance</h2>
+    <p>This App is designed with the US Children’s Online Privacy Protection Act (COPPA), the EU GDPR (including provisions for children), and similar child-protection frameworks in mind. It is built as a no-data-collection product, the strongest way to protect young users.</p>
+
+    <h2>8. Changes</h2>
+    <p>If we ever change this policy, we will update the date above. Since the App collects nothing, any change would only make this policy clearer.</p>
+
+    <h2>9. Contact</h2>
+    <p>For questions about this privacy policy, please contact: <a href="mailto:privacy@example.com">privacy@example.com</a></p>
+  </div>
+  <div class="foot">© <span id="y2"></span> Drawing Master · Made for families</div>
+</div>
+<script>
+  var y = new Date().getFullYear();
+  document.getElementById('y').textContent = y;
+  document.getElementById('y2').textContent = y;
+</script>
+</body>
+</html>

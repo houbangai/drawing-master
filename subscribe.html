@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Drawing Master - a complete art learning program for kids. No ads, no tracking, fully offline. Get lifetime access.">
+<title>Get Drawing Master - Lifetime Access</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23FF5C7C'/%3E%3Ccircle cx='26' cy='26' r='5' fill='white'/%3E%3Ccircle cx='40' cy='26' r='5' fill='%23FFE9A8'/%3E%3Ccircle cx='26' cy='40' r='5' fill='%23A8F0E4'/%3E%3Ccircle cx='40' cy='40' r='5' fill='%23D6CFFB'/%3E%3C/svg%3E">
+<style>
+  :root{--brand:#FF5C7C;--brand2:#FF8A65;--violet:#7C6FF0;--ink:#242438;--mut:#6b6b7c;--line:#eeeef4;--bg:#faf9fd;--green:#22b07d}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  /* header */
+  header{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+  .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px}
+  .logo .m{width:40px;height:40px;border-radius:13px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:#fff;font-size:21px;box-shadow:0 6px 16px rgba(255,92,124,.3)}
+  .logo small{display:block;font-size:9px;letter-spacing:2px;color:#9a9aab;font-weight:700}
+  .header-cta{background:var(--ink);color:#fff;padding:11px 20px;border-radius:12px;font-size:13px;font-weight:750;text-decoration:none;transition:.2s}
+  .header-cta:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(36,36,56,.25)}
+  /* hero */
+  .hero{text-align:center;padding:54px 0 40px}
+  .pill{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:8px 16px;font-size:12px;font-weight:700;color:var(--brand);box-shadow:0 4px 14px rgba(40,40,80,.05);margin-bottom:22px}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(34,176,125,.15)}
+  h1{font-size:clamp(34px,5.5vw,56px);line-height:1.12;letter-spacing:-1.5px;font-weight:850;margin-bottom:18px}
+  h1 .g{background:linear-gradient(120deg,var(--brand),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{font-size:17px;color:#66667a;max-width:620px;margin:0 auto 26px}
+  .trust{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 20px;font-size:12.5px;color:#7a7a8c;font-weight:600}
+  .trust span{display:inline-flex;align-items:center;gap:6px}
+  .trust svg{width:15px;height:15px;color:var(--green)}
+  /* pricing */
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:20px 0 10px;align-items:stretch}
+  .plan{background:#fff;border:1.5px solid var(--line);border-radius:22px;padding:28px 24px;display:flex;flex-direction:column;position:relative;transition:.25s}
+  .plan:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(40,40,80,.09)}
+  .plan.featured{border:2px solid var(--brand);box-shadow:0 18px 50px rgba(255,92,124,.16);transform:scale(1.03)}
+  .plan.featured:hover{transform:scale(1.03) translateY(-4px)}
+  .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;padding:6px 15px;border-radius:99px;white-space:nowrap}
+  .pname{font-size:15px;font-weight:800;margin-bottom:4px}
+  .pdesc{font-size:12px;color:#9292a3;min-height:34px;margin-bottom:16px}
+  .price{font-size:40px;font-weight:850;letter-spacing:-1px;line-height:1}
+  .price small{font-size:14px;font-weight:600;color:#9292a3}
+  .price .old{font-size:16px;color:#b0b0bd;text-decoration:line-through;font-weight:600;margin-left:8px}
+  .per{font-size:12px;color:#9292a3;margin:6px 0 20px}
+  .btn{display:block;text-align:center;text-decoration:none;padding:14px;border-radius:13px;font-size:14px;font-weight:800;transition:.2s;width:100%}
+  .btn-solid{background:var(--ink);color:#fff}
+  .btn-solid:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(36,36,56,.22)}
+  .btn-brand{background:linear-gradient(120deg,var(--brand),var(--brand2));color:#fff;box-shadow:0 10px 24px rgba(255,92,124,.3)}
+  .btn-brand:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(255,92,124,.42)}
+  .btn-ghost{background:#f5f5f9;color:var(--ink)}
+  .btn-ghost:hover{background:#ededf4}
+  .feats{list-style:none;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+  .feats li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#55556a;margin-bottom:11px}
+  .feats li svg{width:17px;height:17px;flex:none;color:var(--green);margin-top:1px}
+  .feats li.no svg{color:#c7c7d2}
+  .feats li.no{color:#a3a3b0}
+  /* faq */
+  .section-t{text-align:center;font-size:28px;font-weight:850;letter-spacing:-.8px;padding:60px 0 8px}
+  .faq{max-width:720px;margin:0 auto;padding-bottom:20px}
+  .qa{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+  .qa summary{padding:17px 20px;font-weight:700;font-size:14px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  .qa summary::-webkit-details-marker{display:none}
+  .qa summary::after{content:'+';font-size:20px;color:var(--brand);font-weight:400;transition:.2s}
+  .qa[open] summary::after{transform:rotate(45deg)}
+  .qa p{padding:0 20px 18px;font-size:13.5px;color:#6b6b7c}
+  /* bottom cta */
+  .bottom{text-align:center;background:linear-gradient(135deg,#fff0f3,#f3f0ff);border-radius:26px;padding:44px 24px;margin:30px 0 50px}
+  .bottom h2{font-size:28px;font-weight:850;letter-spacing:-.8px;margin-bottom:10px}
+  .bottom p{color:#66667a;margin-bottom:22px}
+  .bottom .btn{max-width:320px;margin:0 auto;font-size:15px;padding:16px}
+  /* footer */
+  footer{text-align:center;padding:30px 0 50px;color:#9a9aab;font-size:12px;border-top:1px solid var(--line)}
+  footer a{color:#7a7a8c;text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--brand)}
+  .note{background:#fff8e8;border:1px solid #ffe3a8;color:#96701f;border-radius:12px;padding:12px 16px;font-size:12px;max-width:760px;margin:0 auto 26px;text-align:left}
+  /* showcase images */
+  .showcase{max-width:960px;margin:8px auto 30px}
+  .showcase img{width:100%;border-radius:18px;box-shadow:0 16px 40px rgba(40,40,80,.12);display:block;border:1px solid #f0eef6}
+  .showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:960px;margin:22px auto 34px}
+  .showcase-grid img{width:100%;border-radius:16px;box-shadow:0 12px 30px rgba(40,40,80,.1);display:block;border:1px solid #f0eef6}
+  .show-cap{text-align:center;font-size:12px;color:#9a9aab;margin-top:-22px;margin-bottom:34px;font-weight:600}
+  @media(max-width:900px){.pricing{grid-template-columns:1fr!important;max-width:440px;margin:0 auto}.plan.featured{transform:none!important}.plan.featured:hover{transform:translateY(-4px)!important}.hero{padding-top:34px}.plan{padding:24px 22px}.showcase-grid{grid-template-columns:1fr}.show-cap{margin-top:-16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo"><div class="m">🎨</div><div>Drawing Master<small>ART FOR KIDS</small></div></div>
+    <a class="header-cta" href="#pricing">Get Lifetime Access</a>
+  </header>
+
+  <section class="hero">
+    <div class="pill"><span class="dot"></span> Trusted by parents · No ads, ever</div>
+    <h1>From first scribbles<br>to <span class="g">little masterpieces</span>.</h1>
+    <p class="sub">A complete art journey for kids — 25 progressive lessons, real drawing tools, and gentle AI feedback. No ads. No accounts. No data leaving the device.</p>
+    <div class="trust">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Works 100% offline</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> No ads or tracking</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Kid-safe & private</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> One-time payment</span>
+    </div>
+  </section>
+
+  <div class="showcase">
+    <img src="images/app_screens.png" alt="Drawing Master app - drawing studio, lessons and AI feedback">
+  </div>
+
+  <div class="note">
+    <b>Demo page:</b> The buttons below point to a placeholder link. Replace <code>YOUR_GUMROAD_LINK</code> with your real Gumroad / Lemon Squeezy product URL before going live. See the deployment guide for step-by-step instructions.
+  </div>
+
+  <section class="pricing" id="pricing">
+    <!-- 免费版 -->
+    <div class="plan">
+      <div class="pname">Starter</div>
+      <div class="pdesc">Try it out, no strings attached.</div>
+      <div class="price">$0</div>
+      <div class="per">Free forever</div>
+      <a class="btn btn-ghost" href="DrawingMaster.html">Download Free</a>
+      <ul class="feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Full drawing studio & tools</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> First 5 starter lessons</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Save & export drawings</li>
+        <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg> Advanced lessons (20)</li>
+        <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg> AI art helper & scoring</li>
+        <li class="no"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg> Printable workbook PDF</li>
+      </ul>
+    </div>
+
+    <!-- 月付 -->
+    <div class="plan">
+      <div class="pname">Monthly</div>
+      <div class="pdesc">Flexible, cancel anytime.</div>
+      <div class="price">$3.9<small>/mo</small></div>
+      <div class="per">Billed monthly</div>
+      <!-- ↓↓↓ 替换成你的收款链接 ↓↓↓ -->
+      <a class="btn btn-solid" href="https://YOUR_GUMROAD_LINK/monthly" target="_blank" rel="noopener">Subscribe Monthly</a>
+      <ul class="feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Everything in Starter</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> All 25 lessons, 5 stages</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> AI art helper & scoring</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Full printable workbook</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> New content updates</li>
+      </ul>
+    </div>
+
+    <!-- 终身版（主推） -->
+    <div class="plan featured">
+      <div class="badge">BEST VALUE</div>
+      <div class="pname">Lifetime</div>
+      <div class="pdesc">Pay once, yours forever.</div>
+      <div class="price">$19<span class="old">$39</span></div>
+      <div class="per">One-time payment · Save 50%</div>
+      <!-- ↓↓↓ 替换成你的收款链接 ↓↓↓ -->
+      <a class="btn btn-brand" href="https://YOUR_GUMROAD_LINK/lifetime" target="_blank" rel="noopener">Get Lifetime Access</a>
+      <ul class="feats">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Everything in Monthly</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Pay once, keep forever</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Printable workbook PDF (28 pages)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> All future updates included</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> 30-day money-back guarantee</li>
+      </ul>
+    </div>
+  </section>
+
+  <h2 class="section-t">Questions parents ask</h2>
+  <div class="faq">
+    <details class="qa"><summary>Is my child's data safe?</summary><p>Absolutely. The app collects no personal information, has no accounts, shows no ads, and never sends anything to a server. All artwork and progress stay in the browser on your own device. It's designed around COPPA and GDPR child-privacy principles.</p></details>
+    <details class="qa"><summary>Does it need internet or a subscription to keep working?</summary><p>No. Drawing Master is a single file that works fully offline — on a plane, at Grandma's, anywhere. A subscription or one-time purchase supports development and unlocks the complete curriculum; the app itself never "phones home" to check your license.</p></details>
+    <details class="qa"><summary>What devices does it work on?</summary><p>Any modern web browser — computers, tablets, and phones. It's touch-friendly, so kids can draw with a finger or stylus. Just open the downloaded HTML file.</p></details>
+    <details class="qa"><summary>What's included in the printable workbook?</summary><p>28 A4 pages that follow the 25 lessons — tracing grids, coloring shapes, composition practice, and a graduation certificate. A great screen-free companion to the app.</p></details>
+    <details class="qa"><summary>Can I get a refund?</summary><p>Yes. If you're not happy within 30 days, contact us for a full refund — no questions asked.</p></details>
+  </div>
+
+  <div class="showcase-grid">
+    <img src="images/learning_path.png" alt="5 stages, 25 progressive lessons">
+    <img src="images/workbook_preview.png" alt="28-page printable workbook">
+  </div>
+  <div class="show-cap">A complete 25-lesson curriculum &middot; plus a 28-page printable workbook</div>
+
+  <section class="bottom">
+    <h2>Ready to start the art journey?</h2>
+    <p>One payment. A complete art education. A child who loves to create.</p>
+    <!-- ↓↓↓ 替换成你的收款链接 ↓↓↓ -->
+    <a class="btn btn-brand" href="https://YOUR_GUMROAD_LINK/lifetime" target="_blank" rel="noopener">Get Lifetime Access - $19</a>
+  </section>
+
+  <footer>
+    © <span id="y"></span> Drawing Master · Made for families, everywhere.
+    <div style="margin-top:10px"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:support@example.com">Contact</a></div>
+  </footer>
+</div>
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>

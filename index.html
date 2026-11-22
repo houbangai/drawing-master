@@ -1,0 +1,2862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23FF5C7C'/%3E%3Ccircle cx='26' cy='26' r='5' fill='white'/%3E%3Ccircle cx='40' cy='26' r='5' fill='%23FFE9A8'/%3E%3Ccircle cx='26' cy='40' r='5' fill='%23A8F0E4'/%3E%3Ccircle cx='40' cy='40' r='5' fill='%23D6CFFB'/%3E%3C/svg%3E">
+<title>Drawing Master - From Zero to Master</title>
+<style>
+/* ============================================================
+   Drawing Master · Design System v2
+   Refined, modern, kid-friendly - full component styles
+   ============================================================ */
+
+:root{
+  --bg:#F7F8FC;
+  --surface:#FFFFFF;
+  --surface-2:#F4F6FB;
+  --surface-3:#EEF1F8;
+  --text:#1E2440;
+  --text-2:#6E7892;
+  --text-3:#A6AEC2;
+  --brand:#FF5C7C;
+  --brand-2:#FF8A5B;
+  --brand-soft:#FFF0F3;
+  --violet:#7C6CF0;
+  --violet-soft:#F1EFFE;
+  --teal:#1FC2AC;
+  --teal-soft:#E8FAF6;
+  --amber:#F5B942;
+  --amber-soft:#FFF8E7;
+  --blue:#4C8DF6;
+  --blue-soft:#EBF2FE;
+  --green:#22C55E;
+  --red:#EF4444;
+  --border:#E9ECF4;
+  --border-2:#DDE2EE;
+  --sh-1:0 1px 3px rgba(30,36,64,.04);
+  --sh-2:0 4px 16px rgba(30,36,64,.06);
+  --sh-3:0 12px 32px rgba(30,36,64,.09);
+  --sh-4:0 24px 64px rgba(30,36,64,.13);
+  --sh-brand:0 8px 24px rgba(255,92,124,.28);
+  --r-s:10px; --r-m:16px; --r-l:22px; --r-xl:30px; --r-full:999px;
+  --topbar-h:72px;
+  --ease:cubic-bezier(.22,.8,.32,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Segoe UI",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.5;
+  -webkit-font-smoothing:antialiased;min-height:100vh;
+  background-image:
+    radial-gradient(900px 500px at -5% -10%,rgba(255,92,124,.07),transparent 60%),
+    radial-gradient(800px 500px at 105% 0%,rgba(124,108,240,.07),transparent 60%);
+  background-attachment:fixed;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;outline:none;-webkit-tap-highlight-color:transparent}
+input{font-family:inherit;outline:none}
+svg{display:block}
+.ic{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:100;height:var(--topbar-h);
+  display:flex;align-items:center;gap:24px;padding:0 28px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer;flex:none}
+.brand-mark{
+  width:44px;height:44px;border-radius:14px;flex:none;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  display:grid;place-items:center;color:#fff;box-shadow:var(--sh-brand);
+}
+.brand-mark .ic{width:24px;height:24px;stroke-width:2.2}
+.brand-text b{display:block;font-size:17px;font-weight:800;letter-spacing:.3px;line-height:1.2}
+.brand-text small{display:block;font-size:11px;color:var(--text-3);font-weight:600;letter-spacing:.5px;margin-top:2px}
+
+.nav-tabs{display:flex;align-items:center;gap:4px;flex:1;justify-content:center}
+.nav-tab{
+  display:flex;align-items:center;gap:7px;padding:9px 15px;border-radius:var(--r-full);
+  font-size:13px;font-weight:650;color:var(--text-2);white-space:nowrap;transition:all .2s var(--ease);
+}
+.nav-tab .ic{width:17px;height:17px}
+.nav-tab:hover{background:var(--surface-2);color:var(--text)}
+.nav-tab.active{background:var(--text);color:#fff;box-shadow:var(--sh-2)}
+
+.user-chip{display:flex;align-items:center;gap:11px;cursor:pointer;flex:none}
+.level-ring{
+  width:46px;height:46px;border-radius:50%;flex:none;display:grid;place-items:center;
+  background:conic-gradient(var(--brand) 0%,var(--amber) 100%);
+  position:relative;
+}
+.level-ring::before{content:"";position:absolute;inset:3px;background:var(--surface);border-radius:50%}
+.level-ring span{position:relative;font-size:11px;font-weight:800;color:var(--text)}
+.user-meta{min-width:92px}
+.user-meta .u-line{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:5px}
+.user-meta .u-line b{font-weight:750;color:var(--text)}
+.user-meta .u-line em{font-style:normal;color:var(--text-3);font-variant-numeric:tabular-nums}
+.exp-track{height:6px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.exp-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width .6s var(--ease)}
+
+/* ---------- Page container ---------- */
+#main{padding:26px 28px 60px;max-width:1720px;margin:0 auto}
+.page{display:none;animation:pageIn .35s var(--ease)}
+.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);box-shadow:var(--sh-2)}
+.panel-title{
+  display:flex;align-items:center;gap:9px;font-size:14px;font-weight:800;
+  padding:18px 20px 14px;border-bottom:1px solid var(--border)
+}
+.panel-title .ic{width:18px;height:18px;color:var(--brand)}
+
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.page-head h1{font-size:27px;font-weight:850;letter-spacing:-.5px;display:flex;align-items:center;gap:10px}
+.page-head h1 .ic{width:26px;height:26px;color:var(--brand);stroke-width:2.2}
+.page-head p{color:var(--text-2);font-size:13px;margin-top:6px}
+.head-pill{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-full);padding:9px 16px;font-size:12px;font-weight:700;color:var(--text-2);box-shadow:var(--sh-1)}
+.head-pill .ic{width:16px;height:16px;color:var(--teal)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:var(--r-m);font-size:13px;font-weight:700;transition:all .2s var(--ease)}
+.btn .ic{width:17px;height:17px}
+.btn-primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:var(--sh-brand)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,92,124,.36)}
+.btn-dark{background:var(--text);color:#fff;box-shadow:var(--sh-2)}
+.btn-dark:hover{transform:translateY(-2px)}
+.btn-ghost{background:var(--surface-2);color:var(--text-2)}
+.btn-ghost:hover{background:var(--surface-3);color:var(--text)}
+.btn-success{background:var(--green);color:#fff}
+.btn-success:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+
+/* ============================================================
+   Studio
+   ============================================================ */
+.studio{display:grid;grid-template-columns:224px minmax(0,1fr) 244px;gap:18px;align-items:start}
+
+.tool-panel{max-height:calc(100vh - var(--topbar-h) - 46px);overflow-y:auto}
+.tool-panel::-webkit-scrollbar,.levels-panel::-webkit-scrollbar{width:6px}
+.tool-panel::-webkit-scrollbar-thumb,.levels-panel::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:99px}
+
+.tool-sec{padding:16px 18px;border-bottom:1px solid var(--border)}
+.tool-sec:last-child{border:0}
+.sec-label{font-size:11px;font-weight:750;color:var(--text-3);letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px;display:flex;justify-content:space-between}
+.sec-label b{color:var(--brand);font-variant-numeric:tabular-nums;letter-spacing:0}
+
+.brush-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tool-btn{
+  display:flex;flex-direction:column;align-items:center;gap:6px;padding:11px 4px;
+  border-radius:var(--r-m);background:var(--surface-2);transition:all .18s var(--ease);
+  border:1.5px solid transparent;
+}
+.tool-btn .ic{width:22px;height:22px;color:var(--text-2)}
+.tool-btn span{font-size:10px;font-weight:650;color:var(--text-2)}
+.tool-btn:hover{background:var(--surface-3);transform:translateY(-2px)}
+.tool-btn.active{background:var(--brand-soft);border-color:var(--brand)}
+.tool-btn.active .ic,.tool-btn.active span{color:var(--brand)}
+
+.color-main{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.color-input{width:44px;height:44px;border-radius:13px;border:none;padding:0;background:none;cursor:pointer;flex:none}
+.color-input::-webkit-color-swatch-wrapper{padding:0}
+.color-input::-webkit-color-swatch{border:none;border-radius:13px}
+.color-hex{font-size:12px;font-weight:700;color:var(--text-2);font-variant-numeric:tabular-nums;letter-spacing:.5px}
+.palette{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
+.swatch{aspect-ratio:1;border-radius:9px;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px var(--border);transition:transform .15s var(--ease),box-shadow .15s}
+.swatch:hover{transform:scale(1.14)}
+.swatch.active{box-shadow:0 0 0 2px var(--brand);transform:scale(1.1)}
+
+.slider{width:100%;height:5px;-webkit-appearance:none;appearance:none;border-radius:99px;background:var(--surface-3);cursor:pointer}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 2px 8px rgba(255,92,124,.4);cursor:pointer}
+.slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--brand);border:3px solid #fff;box-shadow:0 2px 8px rgba(255,92,124,.4);cursor:pointer}
+
+.act-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}
+.act{
+  display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 4px;
+  border-radius:11px;background:var(--surface-2);font-size:11px;font-weight:650;color:var(--text-2);transition:all .16s var(--ease)
+}
+.act .ic{width:15px;height:15px}
+.act:hover{background:var(--surface-3);color:var(--text);transform:translateY(-1px)}
+.act.on{background:var(--violet-soft);color:var(--violet);box-shadow:inset 0 0 0 1.5px var(--violet)}
+.act.danger{color:var(--red)}
+.act.danger:hover{background:#FEF0F0}
+.save-stack{display:flex;flex-direction:column;gap:8px}
+.save-stack .btn{width:100%}
+
+/* Canvas area */
+.canvas-area{display:flex;flex-direction:column;gap:12px;min-width:0}
+.canvas-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-m);padding:10px 14px;box-shadow:var(--sh-1);flex-wrap:wrap}
+.canvas-bar .cb-left{display:flex;align-items:center;gap:10px;min-width:0}
+.lesson-tag{display:inline-flex;align-items:center;gap:6px;background:var(--brand-soft);color:var(--brand);padding:6px 13px;border-radius:var(--r-full);font-size:12px;font-weight:750;white-space:nowrap}
+.lesson-tag .ic{width:14px;height:14px}
+.cb-tip{font-size:12px;color:var(--text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cb-right{display:flex;align-items:center;gap:7px}
+.ref-btn,.ref-clear{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:10px;background:var(--surface-2);font-size:11px;font-weight:650;color:var(--text-2);transition:all .16s}
+.ref-btn .ic,.ref-clear .ic{width:15px;height:15px}
+.ref-btn:hover{background:var(--blue-soft);color:var(--blue)}
+.ref-clear{padding:7px 9px;color:var(--red)}
+.ref-bar{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-m);padding:9px 14px;font-size:11px;color:var(--text-2)}
+.ref-bar .slider{width:150px}
+
+.canvas-shell{
+  position:relative;width:100%;aspect-ratio:10/7;background:#fff;border-radius:var(--r-l);overflow:hidden;
+  box-shadow:var(--sh-3);border:1px solid var(--border);
+  background-image:radial-gradient(#E6E9F2 1px,transparent 1px);background-size:22px 22px;
+}
+.canvas-shell canvas,.canvas-shell .ref-layer{position:absolute;inset:0;width:100%;height:100%}
+#drawCanvas{z-index:2;cursor:crosshair;touch-action:none}
+.ref-layer{z-index:1;object-fit:contain;opacity:.35;pointer-events:none}
+#gridCanvas{z-index:3;pointer-events:none}
+.canvas-foot{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:var(--text-3);padding:0 4px;flex-wrap:wrap}
+.canvas-foot b{color:var(--text-2);font-weight:650}
+
+/* Side helper */
+.assist-panel{max-height:calc(100vh - var(--topbar-h) - 46px);overflow-y:auto}
+.assist-hero{text-align:center;padding:22px 18px 16px}
+.assist-hero .ah-icon{width:64px;height:64px;margin:0 auto 12px;border-radius:20px;background:linear-gradient(135deg,var(--violet-soft),var(--brand-soft));display:grid;place-items:center;color:var(--violet)}
+.assist-hero .ah-icon .ic{width:32px;height:32px;stroke-width:1.8}
+.assist-hero h4{font-size:14px;font-weight:800;margin-bottom:7px}
+.assist-hero p{font-size:12px;color:var(--text-2);line-height:1.7}
+.assist-list{padding:4px 14px 16px;display:flex;flex-direction:column;gap:8px}
+.assist-item{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:13px;background:var(--surface-2);text-align:left;font-size:12px;font-weight:650;color:var(--text-2);transition:all .16s var(--ease)}
+.assist-item .ic{width:17px;height:17px;color:var(--brand)}
+.assist-item:hover{background:var(--brand-soft);color:var(--brand);transform:translateX(3px)}
+.assist-result{margin:0 14px 16px;padding:14px;border-radius:14px;background:var(--amber-soft);border:1px solid #F5E6BE;font-size:12px;line-height:1.7;color:#7A5B12}
+.assist-result b{display:block;margin-bottom:6px;font-size:13px;color:#8A6410}
+
+/* ============================================================
+   Courses
+   ============================================================ */
+.course-layout{display:grid;grid-template-columns:292px minmax(0,1fr);gap:18px;align-items:start}
+.levels-panel{padding:12px;max-height:calc(100vh - var(--topbar-h) - 130px);overflow-y:auto}
+.level-card{border:1.5px solid transparent;border-radius:var(--r-m);overflow:hidden;margin-bottom:8px;transition:border-color .2s,background .2s}
+.level-card.open{background:var(--surface-2);border-color:var(--border)}
+.level-head{display:flex;align-items:center;gap:11px;padding:12px;cursor:pointer;border-radius:var(--r-m)}
+.level-head:hover{background:var(--surface-2)}
+.level-emoji{font-size:22px;width:34px;text-align:center;flex:none}
+.level-info{flex:1;min-width:0}
+.level-name{font-size:13px;font-weight:800}
+.level-sub{font-size:10px;color:var(--text-3);margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.level-meter{height:4px;border-radius:99px;background:var(--surface-3);margin-top:7px;overflow:hidden}
+.level-meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+.level-arrow{color:var(--text-3);transition:transform .25s var(--ease);flex:none}
+.level-arrow .ic{width:16px;height:16px}
+.level-card.open .level-arrow{transform:rotate(90deg)}
+.level-lessons{display:none;padding:2px 8px 10px}
+.level-card.open .level-lessons{display:block}
+.lesson-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:12px;transition:all .15s}
+.lesson-item:hover{background:var(--surface)}
+.lesson-item.active{background:var(--surface);box-shadow:var(--sh-1);font-weight:700;color:var(--brand)}
+.lesson-item .li-emoji{font-size:14px;width:18px;text-align:center}
+.lesson-item .li-stars{margin-left:auto;font-size:9px;color:var(--amber);letter-spacing:-1px}
+.lesson-item .li-check{color:var(--green)}
+.lesson-item .li-check .ic{width:14px;height:14px}
+
+.lesson-body{padding:26px 28px;min-height:420px}
+.empty-state{text-align:center;color:var(--text-3);padding:90px 20px}
+.empty-state .ic{width:48px;height:48px;margin:0 auto 14px;color:var(--border-2);stroke-width:1.5}
+.lesson-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px}
+.lh-emoji{font-size:44px;width:72px;height:72px;border-radius:20px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.lesson-header h2{font-size:23px;font-weight:850;margin:4px 0 8px}
+.lb-meta{display:flex;gap:8px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--r-full);background:var(--surface-2);font-size:11px;font-weight:650;color:var(--text-2)}
+.chip .ic{width:13px;height:13px}
+.chip.stars{background:var(--amber-soft);color:#B47C0A}
+.lesson-intro{background:linear-gradient(135deg,var(--brand-soft),var(--violet-soft));border-radius:var(--r-m);padding:15px 18px;font-size:13px;line-height:1.75;border-left:3px solid var(--brand);margin-bottom:22px}
+.section-heading{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;margin:22px 0 13px}
+.section-heading .ic{width:18px;height:18px;color:var(--violet)}
+.theory-list{display:grid;gap:9px}
+.theory-item{display:flex;gap:12px;align-items:flex-start;background:var(--surface-2);padding:12px 15px;border-radius:13px;font-size:13px;line-height:1.65;color:var(--text-2)}
+.ti-num{width:22px;height:22px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:10px;font-weight:800;flex:none;margin-top:1px}
+.step-list{display:grid;gap:12px}
+.step-item{display:flex;gap:13px}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--violet);color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800;flex:none}
+.step-item b{font-size:13px;font-weight:750}
+.step-item p{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.6}
+.task-box{background:var(--amber-soft);border:1.5px dashed var(--amber);border-radius:var(--r-m);padding:18px 20px;margin-top:22px}
+.task-box h4{font-size:14px;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.task-box h4 .ic{width:17px;height:17px;color:var(--amber)}
+.task-box p{font-size:12px;line-height:1.7;color:#7A5B12;margin-bottom:5px}
+.task-box .tt{color:#B47C0A}
+.tips-box{background:var(--teal-soft);border-radius:var(--r-m);padding:15px 18px;margin-top:16px}
+.tips-box b{font-size:12px;color:#0E8F7B;display:flex;align-items:center;gap:7px}
+.tips-box b .ic{width:15px;height:15px}
+.tips-box ul{margin:8px 0 0;padding-left:18px;font-size:12px;line-height:1.9;color:#0E8F7B}
+.lesson-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+
+/* ============================================================
+   Practice
+   ============================================================ */
+.prac-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:18px}
+.practice-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);padding:24px;box-shadow:var(--sh-2);position:relative;overflow:hidden;transition:all .25s var(--ease)}
+.practice-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--pc,var(--brand))}
+.practice-card:hover{transform:translateY(-5px);box-shadow:var(--sh-3)}
+.pc-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;background:color-mix(in srgb,var(--pc,var(--brand)) 12%,#fff);color:var(--pc,var(--brand))}
+.pc-icon .ic{width:26px;height:26px;stroke-width:2}
+.practice-card h3{font-size:16px;font-weight:800;margin:15px 0 7px}
+.practice-card p{font-size:12px;color:var(--text-2);line-height:1.7;min-height:62px}
+.practice-card .btn{width:100%;margin-top:10px;background:var(--surface-2);color:var(--text-2)}
+.practice-card .btn:hover{background:var(--pc,var(--brand));color:#fff}
+
+/* ============================================================
+   Gallery
+   ============================================================ */
+.gal-stat{font-size:12px;color:var(--text-2)}
+.gal-stat b{color:var(--brand);font-size:17px;font-weight:850;font-variant-numeric:tabular-nums}
+.gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:18px}
+.work-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-m);overflow:hidden;box-shadow:var(--sh-2);transition:all .22s var(--ease)}
+.work-card:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.work-img{width:100%;aspect-ratio:10/7;object-fit:cover;background:var(--surface-2);display:block;cursor:zoom-in}
+.work-info{padding:13px 15px}
+.work-title{font-size:13px;font-weight:750;margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.work-meta{display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--text-3)}
+.work-stars{color:var(--amber);font-size:11px}
+.work-del{color:var(--text-3);padding:3px;border-radius:6px}
+.work-del:hover{color:var(--red);background:#FEF0F0}
+.work-del .ic{width:15px;height:15px}
+.work-empty{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-3)}
+.work-empty .ge-ico{width:88px;height:88px;margin:0 auto 16px;border-radius:26px;background:var(--surface-2);display:grid;place-items:center;color:var(--border-2)}
+.work-empty .ge-ico .ic{width:42px;height:42px;stroke-width:1.4}
+.work-empty h3{color:var(--text);font-size:16px;margin-bottom:6px}
+.work-empty p{font-size:12px;margin-bottom:18px}
+
+/* ============================================================
+   AI Helper
+   ============================================================ */
+.ai-badge{display:inline-flex;align-items:center;gap:7px;background:var(--teal-soft);color:#0E8F7B;padding:9px 16px;border-radius:var(--r-full);font-size:12px;font-weight:750}
+.ai-badge .ic{width:16px;height:16px}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(318px,1fr));gap:18px}
+.ai-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);padding:24px;box-shadow:var(--sh-2)}
+.ai-card.wide{grid-column:1/-1}
+.ai-head{display:flex;align-items:center;gap:13px;margin-bottom:12px}
+.ai-ico{width:46px;height:46px;border-radius:14px;background:var(--violet-soft);color:var(--violet);display:grid;place-items:center;flex:none}
+.ai-ico .ic{width:23px;height:23px}
+.ai-head h3{font-size:16px;font-weight:800}
+.ai-card>p{font-size:12px;color:var(--text-2);line-height:1.7;margin-bottom:16px}
+.ai-color-row{display:flex;align-items:center;gap:12px}
+.ai-output{margin-top:16px;font-size:12px;line-height:1.7}
+.ai-result-box{background:var(--surface-2);border-radius:14px;padding:16px}
+.color-swatch-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.color-chip{width:36px;height:36px;border-radius:10px;box-shadow:0 0 0 1px var(--border)}
+.bar-pair{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:11px}
+.bar-pair .bl{width:48px;color:var(--text-2);font-weight:650}
+.bar-track{flex:1;height:10px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.bar-fill{height:100%;border-radius:99px;transition:width .5s var(--ease)}
+.bar-pair .bv{width:34px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:10px 0}
+.grid9 div{border-radius:7px;padding:8px 4px;text-align:center;font-size:10px;font-weight:700}
+.lineart-preview{width:100%;max-height:320px;object-fit:contain;border-radius:12px;border:1px solid var(--border);background:#fff;margin-top:12px}
+.score-big{display:flex;align-items:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.score-num{font-size:48px;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--brand),var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.score-praise b{font-size:14px;display:block}
+.score-praise span{color:var(--amber);font-size:14px;letter-spacing:2px}
+.score-dim{margin:12px 0}
+.score-dim-head{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:6px}
+.dim-bar{height:8px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.dim-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--teal),var(--green))}
+.score-dim-tip{font-size:11px;color:var(--text-3);margin-top:4px}
+
+/* ============================================================
+   Progress
+   ============================================================ */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:16px;margin-bottom:20px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-m);padding:20px;text-align:center;box-shadow:var(--sh-2)}
+.stat-icon{width:42px;height:42px;border-radius:13px;margin:0 auto 12px;display:grid;place-items:center;background:var(--brand-soft);color:var(--brand)}
+.stat-icon .ic{width:21px;height:21px}
+.stat-num{font-size:28px;font-weight:850;font-variant-numeric:tabular-nums}
+.stat-label{font-size:11px;color:var(--text-3);margin-top:3px;font-weight:600}
+.badge-wrap{padding:20px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:14px}
+.badge-item{text-align:center;padding:18px 8px;border-radius:var(--r-m);background:var(--surface-2);filter:grayscale(1);opacity:.5;transition:all .25s var(--ease)}
+.badge-item.earned{filter:none;opacity:1;background:linear-gradient(135deg,var(--amber-soft),#FFF1D6);box-shadow:var(--sh-1)}
+.b-emoji{font-size:36px;line-height:1}
+.b-name{font-size:12px;font-weight:800;margin-top:8px}
+.b-desc{font-size:10px;color:var(--text-3);margin-top:3px}
+
+/* ============================================================
+   Modal / Toast
+   ============================================================ */
+.toasts{position:fixed;top:88px;right:22px;z-index:300;display:flex;flex-direction:column;gap:10px;max-width:calc(100vw - 44px)}
+.toast{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:13px;padding:13px 17px;box-shadow:var(--sh-3);font-size:12px;font-weight:650;animation:toastIn .35s var(--ease)}
+.toast .ic{width:17px;height:17px;color:var(--green)}
+.toast.warn{border-left-color:var(--amber)}.toast.warn .ic{color:var(--amber)}
+.toast.badge-item{border-left-color:var(--violet)}.toast.badge .ic{color:var(--violet)}
+@keyframes toastIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:none}}
+
+.backdrop{position:fixed;inset:0;background:rgba(20,25,45,.5);z-index:200;display:grid;place-items:center;padding:20px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modal{background:var(--surface);border-radius:var(--r-xl);width:100%;max-width:720px;max-height:88vh;overflow-y:auto;padding:30px;position:relative;box-shadow:var(--sh-4);animation:modalIn .3s var(--ease)}
+@keyframes modalIn{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;color:var(--text-2);z-index:2}
+.modal-close:hover{background:var(--surface-3)}
+.modal-close .ic{width:18px;height:18px}
+.modal h2{font-size:20px;font-weight:850;margin-bottom:16px;padding-right:40px}
+.modal img{width:100%;border-radius:var(--r-m)}
+.modal-actions{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+
+/* ============================================================
+   Mobile bottom nav
+   ============================================================ */
+.mobile-tabbar{display:none}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media(max-width:1320px){
+  .studio{grid-template-columns:210px minmax(0,1fr)}
+  .assist-panel{display:none}
+}
+@media(max-width:1024px){
+  .nav-tabs{display:none}
+  .brand-text small{display:none}
+  .studio{grid-template-columns:minmax(0,1fr)}
+  .tool-panel{max-height:none;overflow:visible}
+  .brush-grid{grid-template-columns:repeat(6,1fr)}
+  #main{padding-bottom:96px}
+  .mobile-tabbar{
+    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:150;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-top:1px solid var(--border);padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    justify-content:space-around;
+  }
+  .mtab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;border-radius:12px;color:var(--text-3);font-size:10px;font-weight:650;min-width:52px}
+  .mtab .ic{width:21px;height:21px}
+  .mtab.active{color:var(--brand);background:var(--brand-soft)}
+  .course-layout{grid-template-columns:minmax(0,1fr)}
+  .levels-panel{max-height:280px}
+}
+@media(max-width:640px){
+  .topbar{padding:0 16px;gap:12px}
+  .brand-mark{width:40px;height:40px;border-radius:12px}
+  .brand-text b{font-size:15px}
+  .user-meta{display:none}
+  #main{padding:18px 14px 100px}
+  .page-head h1{font-size:22px}
+  .brush-grid{grid-template-columns:repeat(3,1fr)}
+  .lesson-body{padding:20px 16px}
+  .lesson-header{gap:12px}
+  .lh-emoji{width:56px;height:56px;font-size:34px}
+  .lesson-header h2{font-size:19px}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .ai-grid{grid-template-columns:1fr}
+  .canvas-bar{padding:10px}
+  .cb-tip{display:none}
+}
+
+/* ---- Compatibility with JS-generated markup ---- */
+.start-draw-btn{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;padding:12px 24px;border-radius:var(--r-m);font-size:13px;font-weight:750;box-shadow:var(--sh-brand);display:inline-flex;align-items:center;gap:8px;transition:all .2s var(--ease)}
+.start-draw-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,92,124,.36)}
+.complete-btn{background:var(--green);color:#fff;padding:12px 22px;border-radius:var(--r-m);font-size:13px;font-weight:750;display:inline-flex;align-items:center;gap:8px;transition:all .2s var(--ease)}
+.complete-btn:hover{transform:translateY(-2px)}
+.complete-btn.done{background:var(--surface-2);color:var(--text-3)}
+.ai-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(135deg,var(--violet),#9B8CF7);color:#fff;padding:10px 18px;border-radius:11px;font-size:12px;font-weight:750;transition:all .2s var(--ease)}
+.ai-btn:hover{transform:translateY(-2px)}
+.ai-btn.orange{background:linear-gradient(135deg,var(--amber),var(--brand-2))}
+.bar-pair>span:first-child{width:44px;color:var(--text-2);font-weight:650}
+.bar-pair>span:last-child{width:36px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.section-heading .ic{color:var(--violet)}
+.step-item .step-body b{font-size:13px;font-weight:750}
+.step-item .step-body p{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.6}
+
+/* ---- Compliance footer & privacy policy ---- */
+.legal-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;padding:26px 16px 34px;color:var(--text-3);font-size:11px;text-align:center;border-top:1px solid var(--line);margin-top:12px}
+.legal-foot .dot{opacity:.5}
+.legal-foot button{background:none;border:none;color:var(--brand);font-size:11px;font-weight:700;cursor:pointer;padding:0}
+.legal-foot button:hover{text-decoration:underline}
+.privacy-modal{max-width:600px;max-height:82vh;overflow-y:auto;padding:30px 28px;line-height:1.75;color:var(--text-2);font-size:13px}
+.privacy-modal h2{color:var(--text);font-size:20px;margin:0 0 6px}
+.privacy-modal .pm-date{color:var(--text-3);font-size:11px;margin-bottom:18px}
+.privacy-modal h3{color:var(--text);font-size:14px;margin:20px 0 6px}
+.privacy-modal p{margin:0 0 10px}
+.privacy-modal ul{margin:0 0 10px;padding-left:20px}
+.privacy-modal li{margin-bottom:5px}
+.privacy-modal a{color:var(--brand)}
+
+/* ---- Parent gate footer link ---- */
+#parentGateBtn{background:none;border:none;color:var(--violet);font-size:11px;font-weight:700;cursor:pointer;padding:0}
+#parentGateBtn:hover{text-decoration:underline}
+
+</style>
+</head>
+<body>
+
+<!-- ========== SVG icon library ========== -->
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+<symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1 0 1.8-.6 1.8-1.5 0-.9-.8-1.4-.8-2.2 0-1.4 1.4-2.3 3-2.3H19a2.5 2.5 0 0 0 2.5-2.5C21.5 6.8 17.2 3 12 3Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="9.5" cy="7.5" r="1"/><circle cx="14.5" cy="7.5" r="1"/><circle cx="17" cy="10.5" r="1"/></symbol>
+<symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+<symbol id="i-brush" viewBox="0 0 24 24"><path d="m9.5 14.5-5.5 5.5 1 1 5.5-5.5"/><path d="m13 6 5 5"/><path d="M18 3.5 20.5 6 11 15.5 8.5 13 18 3.5Z"/></symbol>
+<symbol id="i-marker" viewBox="0 0 24 24"><path d="m9 11 6-6 4 4-6 6H9v-4Z"/><path d="M9 15H5l-2 4 6-1v-3Z"/><path d="m14.5 5.5 4 4"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 2.7s6 6.5 6 11.3a6 6 0 0 1-12 0C6 9.2 12 2.7 12 2.7Z"/></symbol>
+<symbol id="i-spray" viewBox="0 0 24 24"><rect x="7" y="10" width="7" height="6" rx="1"/><path d="M14 13h4l3-2v6l-3-2h-4"/><path d="M5 8h2v10H5z"/><circle cx="19" cy="5" r=".8"/><circle cx="22" cy="8" r=".8"/><circle cx="18" cy="9" r=".8"/></symbol>
+<symbol id="i-eraser" viewBox="0 0 24 24"><path d="m7 21-4-4a2 2 0 0 1 0-3l10-10a2 2 0 0 1 3 0l4 4a2 2 0 0 1 0 3l-7 7H9"/><path d="M22 21H9"/><path d="m5 12 7 7"/></symbol>
+<symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 7v6h6"/><path d="M3.5 13a9 9 0 1 0 2.1-6L3 9"/></symbol>
+<symbol id="i-redo" viewBox="0 0 24 24"><path d="M21 7v6h-6"/><path d="M20.5 13a9 9 0 1 1-2.1-6L21 9"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></symbol>
+<symbol id="i-mirror" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="m8 7-4 5 4 5"/><path d="m16 7 4 5-4 5"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6"/><path d="M10 11v6M14 11v6"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M12 13v6M9 16h6"/></symbol>
+<symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="m12 3 1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3Z"/><path d="m19 15 .7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7L19 15Z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 7c-2-1.5-5-2-9-2v14c4 0 7 .5 9 2 2-1.5 5-2 9-2V5c-4 0-7 .5-9 2Z"/><path d="M12 7v14"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+<symbol id="i-gallery" viewBox="0 0 24 24"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 21h12a2 2 0 0 0 2-2V7"/><circle cx="8.5" cy="8.5" r="1"/><path d="m21 12-4-4-6 6"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4Z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10Z"/><path d="M9 22v-7h6v7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2Z"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 17l9 5 9-5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></symbol>
+<symbol id="i-rocket" viewBox="0 0 24 24"><path d="M5 13c-1.5 1.5-2 4-2 6 2 0 4.5-.5 6-2M9 15l-4-4c1-4 5-8 12-9 1 7-3 11-7 12l-4-4Z"/><circle cx="14.5" cy="9.5" r="1.5"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="m3 7 4 4 5-7 5 7 4-4-2 12H5L3 7Z"/></symbol>
+<symbol id="i-ruler" viewBox="0 0 24 24"><path d="M3 15 15 3l6 6L9 21l-6-6Z"/><path d="m9 9 2 2M12 6l2 2M6 12l2 2"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M9.5 3A2.5 2.5 0 0 0 7 5.5v1A2.5 2.5 0 0 0 5 9v1a2.5 2.5 0 0 0 1 4.5v1A2.5 2.5 0 0 0 9.5 18H12V3H9.5Z"/><path d="M14.5 3A2.5 2.5 0 0 1 17 5.5v1A2.5 2.5 0 0 1 19 9v1a2.5 2.5 0 0 1-1 4.5v1A2.5 2.5 0 0 1 14.5 18H12V3h2.5Z"/></symbol>
+<symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="14" r="1"/><circle cx="15" cy="14" r="1"/><path d="M9 17h6M2 12v4M22 12v4"/></symbol>
+<symbol id="i-palette2" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9c0-1.5-1-2-2-2h-2c-1.5 0-2.5-1-2.5-2.5S15 5 13.5 5H12Z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="8" r="1"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 5.6a5 5 0 0 0-7.1 0L12 7.3l-1.7-1.7a5 5 0 0 0-7.1 7.1L12 21l8.8-8.3a5 5 0 0 0 0-7.1Z"/></symbol>
+</svg>
+
+<!-- ========== Top bar ========== -->
+<header class="topbar">
+  <div class="brand" data-tab="studio">
+    <div class="brand-mark"><svg class="ic"><use href="#i-palette"/></svg></div>
+    <div class="brand-text"><b>Drawing Master</b><small>DRAWING MASTER</small></div>
+  </div>
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-tab="studio"><svg class="ic"><use href="#i-home"/></svg>Studio</button>
+    <button class="nav-tab" data-tab="courses"><svg class="ic"><use href="#i-book"/></svg>Courses</button>
+    <button class="nav-tab" data-tab="practice"><svg class="ic"><use href="#i-target"/></svg>Practice</button>
+    <button class="nav-tab" data-tab="gallery"><svg class="ic"><use href="#i-gallery"/></svg>My Gallery</button>
+    <button class="nav-tab" data-tab="ai"><svg class="ic"><use href="#i-robot"/></svg>AI Helper</button>
+    <button class="nav-tab" data-tab="profile"><svg class="ic"><use href="#i-trophy"/></svg>Progress</button>
+  </nav>
+  <div class="user-chip" data-tab="profile">
+    <div class="level-ring"><span id="levelCircle">Lv.1</span></div>
+    <div class="user-meta">
+      <div class="u-line"><b id="expLevelText">Lv.1 Young Artist</b><em id="expNumText">0/200</em></div>
+      <div class="exp-track"><div class="exp-fill" id="expFill"></div></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ========== Studio ========== -->
+<section class="page active" id="page-studio">
+  <div class="studio">
+    <aside class="tool-panel panel">
+      <div class="panel-title"><svg class="ic"><use href="#i-palette2"/></svg>Toolbox</div>
+      <div class="tool-sec">
+        <div class="sec-label">Brushes</div>
+        <div class="brush-grid" id="toolGrid">
+          <button class="tool-btn active" data-tool="pencil"><svg class="ic"><use href="#i-pen"/></svg><span>Pencil</span></button>
+          <button class="tool-btn" data-tool="brush"><svg class="ic"><use href="#i-brush"/></svg><span>Brush</span></button>
+          <button class="tool-btn" data-tool="marker"><svg class="ic"><use href="#i-marker"/></svg><span>Marker</span></button>
+          <button class="tool-btn" data-tool="watercolor"><svg class="ic"><use href="#i-drop"/></svg><span>Watercolor</span></button>
+          <button class="tool-btn" data-tool="spray"><svg class="ic"><use href="#i-spray"/></svg><span>Airbrush</span></button>
+          <button class="tool-btn" data-tool="eraser"><svg class="ic"><use href="#i-eraser"/></svg><span>Eraser</span></button>
+        </div>
+      </div>
+      <div class="tool-sec">
+        <div class="sec-label">Colors</div>
+        <div class="color-main">
+          <input type="color" id="colorPicker" class="color-input" value="#333333">
+          <span class="color-hex" id="currentColorHex">#333333</span>
+        </div>
+        <div class="palette" id="palette"></div>
+      </div>
+      <div class="tool-sec">
+        <div class="sec-label">Brush size <b id="sizeValue">6</b></div>
+        <input type="range" id="sizeSlider" class="slider" min="1" max="50" value="6">
+      </div>
+      <div class="tool-sec">
+        <div class="sec-label">Opacity <b id="opacityValue">100%</b></div>
+        <input type="range" id="opacitySlider" class="slider" min="10" max="100" value="100">
+      </div>
+      <div class="tool-sec">
+        <div class="sec-label">Canvas</div>
+        <div class="act-grid">
+          <button id="undoBtn" class="act"><svg class="ic"><use href="#i-undo"/></svg>Undo</button>
+          <button id="redoBtn" class="act"><svg class="ic"><use href="#i-redo"/></svg>Redo</button>
+          <button id="gridBtn" class="act"><svg class="ic"><use href="#i-grid"/></svg>Grid</button>
+          <button id="mirrorBtn" class="act"><svg class="ic"><use href="#i-mirror"/></svg>Mirror</button>
+          <button id="clearBtn" class="act danger"><svg class="ic"><use href="#i-trash"/></svg>Clear</button>
+          <button id="newBtn" class="act"><svg class="ic"><use href="#i-file"/></svg>New</button>
+        </div>
+      </div>
+      <div class="tool-sec">
+        <div class="sec-label">Save work</div>
+        <div class="save-stack">
+          <button id="saveBtn" class="btn btn-primary"><svg class="ic"><use href="#i-save"/></svg>Save to gallery</button>
+          <button id="exportBtn" class="btn btn-ghost"><svg class="ic"><use href="#i-download"/></svg>Export PNG</button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="canvas-area">
+      <div class="canvas-bar">
+        <div class="cb-left">
+          <span class="lesson-tag" id="currentLessonBadge"><svg class="ic"><use href="#i-sparkle"/></svg>Free drawing</span>
+          <span class="cb-tip" id="canvasTitleTip">Draw anything you like!</span>
+        </div>
+        <div class="cb-right">
+          <label class="ref-btn">Reference<input type="file" id="refFile" accept="image/*" hidden></label>
+          <button id="clearRefBtn" class="ref-clear" title="Hide reference"><svg class="ic"><use href="#i-x"/></svg></button>
+        </div>
+      </div>
+      <div class="ref-bar" id="refControls" style="display:none">
+        <span>Reference opacity</span>
+        <input type="range" id="refOpacitySlider" class="slider" min="10" max="90" value="35">
+      </div>
+      <div class="canvas-shell" id="canvasStage">
+        <img id="refImg" class="ref-layer" alt="Reference">
+        <canvas id="drawCanvas"></canvas>
+        <canvas id="gridCanvas"></canvas>
+      </div>
+      <div class="canvas-foot">
+        <span id="brushInfo"><b>Pencil</b> · Size 6</span>
+        <span><svg class="ic" style="display:inline;width:13px;height:13px;vertical-align:-2px"><use href="#i-bulb"/></svg> Relax your grip for smoother lines</span>
+      </div>
+    </div>
+
+    <aside class="assist-panel panel">
+      <div class="panel-title"><svg class="ic"><use href="#i-bulb"/></svg>Drawing Helper</div>
+      <div class="assist-hero" id="courseHint">
+        <div class="ah-icon"><svg class="ic"><use href="#i-sparkle"/></svg></div>
+        <h4>Start creating</h4>
+        <p>Pick a brush, choose a color, and draw freely. Take a break in Courses anytime!</p>
+      </div>
+      <div class="assist-list">
+        <button id="quickEvalBtn" class="assist-item"><svg class="ic"><use href="#i-target"/></svg>Score my artwork</button>
+        <button id="quickTipBtn" class="assist-item"><svg class="ic"><use href="#i-bulb"/></svg>Give me an idea</button>
+        <button id="quickGoCourseBtn" class="assist-item"><svg class="ic"><use href="#i-book"/></svg>Open a lesson</button>
+      </div>
+      <div id="assistResult" class="assist-result" style="display:none"></div>
+    </aside>
+  </div>
+</section>
+
+<!-- ========== Courses ========== -->
+<section class="page" id="page-courses">
+  <div class="page-head">
+    <div>
+      <h1><svg class="ic"><use href="#i-book"/></svg>Courses</h1>
+      <p>From beginner to master: 5 stages, 25 lessons, theory + practice step by step</p>
+    </div>
+    <div class="head-pill"><svg class="ic"><use href="#i-compass"/></svg>Overall&nbsp;<b id="courseProgressNum" style="color:var(--brand)">0%</b></div>
+  </div>
+  <div class="course-layout">
+    <aside class="levels-panel panel" id="levelsPanel"></aside>
+    <div class="lesson-body panel" id="lessonPanel">
+      <div class="empty-state"><svg class="ic"><use href="#i-book"/></svg>Pick a stage and lesson on the left to begin</div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Practice ========== -->
+<section class="page" id="page-practice">
+  <div class="page-head">
+    <div>
+      <h1><svg class="ic"><use href="#i-target"/></svg>Practice Challenges</h1>
+      <p>Fun little exercises to sharpen your new skills</p>
+    </div>
+  </div>
+  <div class="prac-grid" id="practiceGrid"></div>
+</section>
+
+<!-- ========== Gallery ========== -->
+<section class="page" id="page-gallery">
+  <div class="page-head">
+    <div>
+      <h1><svg class="ic"><use href="#i-gallery"/></svg>My Gallery</h1>
+      <p>All your drawings live here — each one marks your progress</p>
+    </div>
+    <div class="head-pill gal-stat" id="galleryStats"></div>
+  </div>
+  <div class="gal-grid" id="galleryGrid"></div>
+</section>
+
+<!-- ========== AI Helper ========== -->
+<section class="page" id="page-ai">
+  <div class="page-head">
+    <div>
+      <h1><svg class="ic"><use href="#i-robot"/></svg>AI Art Helper</h1>
+      <p>Powered by open-source computer vision — analyze your art and find inspiration</p>
+    </div>
+    <span class="ai-badge"><svg class="ic"><use href="#i-check"/></svg>Runs locally · Privacy friendly</span>
+  </div>
+  <div class="ai-grid">
+    <div class="ai-card">
+      <div class="ai-head"><div class="ai-ico"><svg class="ic"><use href="#i-pen"/></svg></div><h3>Photo to Line Art</h3></div>
+      <p>Upload a photo to auto-extract its outline. Set the result as a reference to trace over.</p>
+      <input type="file" id="lineArtFile" accept="image/*" hidden>
+      <button class="ai-btn" id="lineArtBtn">Choose image & extract</button>
+      <div class="ai-output" id="lineArtOutput"></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-head"><div class="ai-ico"><svg class="ic"><use href="#i-palette2"/></svg></div><h3>Color Analysis</h3></div>
+      <p>Analyze your artwork's main colors, warm-cool balance, and richness.</p>
+      <button class="ai-btn" id="colorAnalyzeBtn">Analyze artwork</button>
+      <div class="ai-output" id="colorOutput"></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-head"><div class="ai-ico"><svg class="ic"><use href="#i-grid"/></svg></div><h3>Composition</h3></div>
+      <p>Check subject placement and balance against the rule of thirds.</p>
+      <button class="ai-btn" id="compAnalyzeBtn">Analyze composition</button>
+      <div class="ai-output" id="compOutput"></div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-head"><div class="ai-ico"><svg class="ic"><use href="#i-ruler"/></svg></div><h3>Smart Palette</h3></div>
+      <p>Pick a base color and get 4 professional palettes generated by color theory.</p>
+      <div class="ai-color-row">
+        <input type="color" id="schemeBaseColor" class="color-input" value="#FF6B9D">
+        <button class="ai-btn" id="schemeBtn">Generate palettes</button>
+      </div>
+      <div class="ai-output" id="schemeOutput"></div>
+    </div>
+    <div class="ai-card wide">
+      <div class="ai-head"><div class="ai-ico"><svg class="ic"><use href="#i-sparkle"/></svg></div><h3>Artwork Scoring</h3></div>
+      <p>Encouraging feedback across completeness, color use, light-shade, and composition.</p>
+      <button class="ai-btn" id="evalBtn">Score artwork</button>
+      <div class="ai-output" id="evalOutput"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== Progress ========== -->
+<section class="page" id="page-profile">
+  <div class="page-head">
+    <div>
+      <h1><svg class="ic"><use href="#i-trophy"/></svg>Progress</h1>
+      <p>See how far you've come on your journey</p>
+    </div>
+  </div>
+  <div class="stat-grid" id="profileStats"></div>
+  <div class="panel">
+    <div class="panel-title"><svg class="ic"><use href="#i-crown"/></svg>Achievement Badges</div>
+    <div class="badge-wrap"><div class="badges" id="badgesGrid"></div></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== Mobile bottom nav ========== -->
+<nav class="mobile-tabbar" id="mobileTabbar">
+  <button class="mtab active" data-tab="studio"><svg class="ic"><use href="#i-home"/></svg>Studio</button>
+  <button class="mtab" data-tab="courses"><svg class="ic"><use href="#i-book"/></svg>Courses</button>
+  <button class="mtab" data-tab="practice"><svg class="ic"><use href="#i-target"/></svg>Practice</button>
+  <button class="mtab" data-tab="gallery"><svg class="ic"><use href="#i-gallery"/></svg>Gallery</button>
+  <button class="mtab" data-tab="ai"><svg class="ic"><use href="#i-robot"/></svg>AI</button>
+  <button class="mtab" data-tab="profile"><svg class="ic"><use href="#i-trophy"/></svg>Profile</button>
+</nav>
+
+<div class="toasts" id="toastContainer"></div>
+<div class="backdrop" id="modalBackdrop" style="display:none">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose"><svg class="ic"><use href="#i-x"/></svg></button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+
+<!-- ========== Compliance footer (for parents) ========== -->
+<footer class="legal-foot">
+  <span>© <span id="footYear"></span> Drawing Master</span>
+  <span class="dot">·</span>
+  <button id="privacyBtn">Privacy Policy</button>
+  <span class="dot">·</span>
+  <button id="parentGateBtn" title="For grown-ups">For Parents: Workbook &amp; More</button>
+  <span class="dot">·</span>
+  <span>Made for families. No ads, no tracking, no data leaves your device.</span>
+</footer>
+<div class="backdrop" id="privacyBackdrop" style="display:none">
+  <div class="modal privacy-modal">
+    <button class="modal-close" id="privacyClose"><svg class="ic"><use href="#i-x"/></svg></button>
+    <div id="privacyContent"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+ * Drawing Master · Course Data
+ * From zero to master: 5 stages / 25 lessons
+ * Each lesson = theory + practice + task + tips
+ * ============================================================ */
+(function (global) {
+  'use strict';
+
+  // ---------- General tip library (for AI hints and course references) ----------
+  window.ART_TIPS = [
+    'Sketch lightly first, don’t press hard from the very beginning.',
+    'Observing matters more than drawing — look closely at the shape and proportions first.',
+    'Hold your pencil loosely and keep your wrist loose for smooth, natural lines.',
+    'Don’t mix too many colors at once; find your main color first, then add variety.',
+    'Empty space is part of composition too — don’t fill every corner.',
+    'Step back to see the whole picture; it reveals problems better than staring at details.',
+    'Don’t erase a mistake — sometimes an "accident" becomes the best part.',
+    'Draw a little every day; persistence matters more than talent.'
+  ];
+
+  window.COURSE_DATA = {
+    levels: [
+      /* ========== Stage 1：Star Beginner ========== */
+      {
+        id: 'L1',
+        name: 'Star Beginner',
+        subtitle: 'The Wonderful World of Lines and Shapes',
+        emoji: '🌟',
+        color: '#FF6B9D',
+        desc: 'Start with the simplest lines and shapes to build little hands’ confidence. This stage isn’t about "likeness" — it’s about "daring to draw".',
+        lessons: [
+          {
+            id: 'L1-1', title: 'Meeting Lines', emoji: '➖', duration: '10 min', stars: 1,
+            intro: 'Lines are the language of drawing. Every picture begins with a single line.',
+            theory: [
+              'Lines vary in thickness, straightness, and spacing.',
+              'Straight lines feel steady and strong; curved lines feel soft and flowing.',
+              'By controlling the pressure of your wrist, you can draw lines that are light or heavy.'
+            ],
+            steps: [
+              { title: 'Horizontal lines', desc: 'Draw a set of horizontal lines, keeping them straight and evenly spaced.' },
+              { title: 'Vertical & diagonal lines', desc: 'Now draw vertical and diagonal lines, minding the gaps between them.' },
+              { title: 'Curves & waves', desc: 'Draw free curves, waves, and spirals with a relaxed wrist.' },
+              { title: 'Combine & create', desc: 'Combine different lines into an abstract pattern.' }
+            ],
+            task: { title: 'A Little Line Garden', desc: 'Draw a "garden" using straight, curved, and wavy lines, with varied spacing.', tip: 'Try different colored pens to make the garden livelier.' },
+            tips: ['Relax your wrist; don’t push only with your fingers.', 'Move your whole arm for long lines — they’ll come out straighter.']
+          },
+          {
+            id: 'L1-2', title: 'Basic Shapes', emoji: '🔺', duration: '12 min', stars: 1,
+            intro: 'Everything in the world can be broken down into circles, squares, and triangles.',
+            theory: [
+              'Circles: the sun, balloons, cheeks — they feel round and cute.',
+              'Squares: houses, boxes, books — they feel stable and orderly.',
+              'Triangles: mountains, roofs, trees — they feel sharp and upward.'
+            ],
+            steps: [
+              { title: 'Draw circles', desc: 'Practice circles of different sizes, keeping them nice and round.' },
+              { title: 'Draw squares', desc: 'Draw squares and rectangles, keeping the edges straight.' },
+              { title: 'Draw triangles', desc: 'Draw triangles pointing in different directions.' },
+              { title: 'Shape collection', desc: 'Combine the three shapes and see what you can make.' }
+            ],
+            task: { title: 'A Little Shape Train', desc: 'Draw a little train using only circles, squares, and triangles.', tip: 'Use circles for wheels, squares for cars, and a triangle for the chimney.' },
+            tips: ['Draw shapes lightly first, then trace over them once the placement is right.', 'Shapes can overlap — that makes the picture more interesting.']
+          },
+          {
+            id: 'L1-3', title: 'Shapes That Change', emoji: '🐱', duration: '15 min', stars: 1,
+            intro: 'A few simple shapes stacked together can become little animals and fun patterns.',
+            theory: [
+              'Combining: put several basic shapes together to create something new.',
+              'Adding: draw lines and small details on a shape to bring it "alive".',
+              'For example: circle + triangle = a kitten’s face; circle + rectangle = a little person’s body.'
+            ],
+            steps: [
+              { title: 'Pick shapes', desc: 'First pick 2-3 basic shapes.' },
+              { title: 'Put them together', desc: 'Combine the shapes into the outline of a little animal.' },
+              { title: 'Add details', desc: 'Add eyes, a mouth, and patterns.' },
+              { title: 'Color it in', desc: 'Color your little animal with your favorite colors.' }
+            ],
+            task: { title: 'My Shape Zoo', desc: 'Draw at least 3 different little animals using combined shapes.', tip: 'Rearrange the same shapes and they become a different animal.' },
+            tips: ['Draw the big shapes first, then add small details.', 'Make the eyes bigger to make the animal cuter.']
+          },
+          {
+            id: 'L1-4', title: 'The Joy of Coloring', emoji: '🎨', duration: '12 min', stars: 1,
+            intro: 'Learn to color evenly for a clean, beautiful picture.',
+            theory: [
+              'Color in one direction, stroke right next to stroke.',
+              'Keep even pressure so the color doesn’t come out patchy.',
+              'Don’t color outside the outline — take your time.'
+            ],
+            steps: [
+              { title: 'Draw borders', desc: 'Draw a few simple shapes as coloring areas.' },
+              { title: 'Color one way', desc: 'Color evenly from left to right (or top to bottom).' },
+              { title: 'Layering colors', desc: 'Try layering two colors and see what new color appears.' }
+            ],
+            task: { title: 'Colorful Balloons', desc: 'Draw a bunch of balloons and color each one evenly.', tip: 'Use contrasting colors for neighboring balloons to make it brighter.' },
+            tips: ['Don’t lift the pen tip too high while coloring.', 'If you color wrong, cover it with another darker layer.']
+          },
+          {
+            id: 'L1-5', title: 'My First Picture', emoji: '🖼️', duration: '20 min', stars: 2,
+            intro: 'Use everything you’ve learned to finish your first complete artwork!',
+            theory: [
+              'A complete picture = main subject + background + details.',
+              'Decide what to draw before you start.',
+              'Include big and small elements, with areas dense and sparse.'
+            ],
+            steps: [
+              { title: 'Brainstorm', desc: 'Think of a favorite topic, like "my home" or "under the sea".' },
+              { title: 'Sketch', desc: 'Lightly sketch the main subject with basic shapes.' },
+              { title: 'Add details', desc: 'Add lines and small decorations.' },
+              { title: 'Color & finish', desc: 'Color evenly, finish your artwork, and save it.' }
+            ],
+            task: { title: 'Graduation piece: My World', desc: 'Independently draw a themed picture and save it to your "My Gallery".', tip: 'When you finish, step back and look at the whole effect.' },
+            tips: ['This is your graduation piece for the beginner stage — keep it safe.', 'Finish it to unlock the next stage!']
+          }
+        ]
+      },
+
+      /* ========== Stage 2：Color Magic ========== */
+      {
+        id: 'L2',
+        name: 'Color Magic',
+        subtitle: 'Discover the Secrets of Color',
+        emoji: '🌈',
+        color: '#FF9F43',
+        desc: 'Color is the soul of painting. Learn to mix and match colors to bring your pictures from "black and white" to "alive".',
+        lessons: [
+          {
+            id: 'L2-1', title: 'Primary Colors', emoji: '🔴', duration: '12 min', stars: 1,
+            intro: 'Red, yellow, and blue are three magical colors — they can make all other colors.',
+            theory: [
+              'Primary colors are red, yellow, and blue; they can’t be made by mixing other colors.',
+              'Red + yellow = orange, yellow + blue = green, blue + red = purple.',
+              'Mixing colors yourself is the best way to understand them.'
+            ],
+            steps: [
+              { title: 'Meet the primary colors', desc: 'Paint a patch of red, yellow, and blue on your paper.' },
+              { title: 'Mix them in pairs', desc: 'Try red+yellow, yellow+blue, and blue+red, and watch what happens.' },
+              { title: 'Make a color wheel', desc: 'Arrange 6 colors in a circle to make your own color wheel.' }
+            ],
+            task: { title: 'My Color Wheel', desc: 'Mix secondary colors from the primaries and draw a beautiful six-color wheel.', tip: 'Take a little paint at first — add more if you need it.' },
+            tips: ['Write down your color recipes.', 'Different mixing ratios give different shades.']
+          },
+          {
+            id: 'L2-2', title: 'Warm & Cool Colors', emoji: '❄️', duration: '12 min', stars: 2,
+            intro: 'Colors have a "temperature" too — some feel warm, others feel cool.',
+            theory: [
+              'Warm colors: red, orange, yellow — like the sun and fire, they feel warm and lively.',
+              'Cool colors: blue, green, purple — like the sea and forest, they feel cool and calm.',
+              'Warm-cool contrast adds depth to a picture.'
+            ],
+            steps: [
+              { title: 'Sort them', desc: 'Sort the colors into warm and cool groups.' },
+              { title: 'A warm picture', desc: 'Draw a "lively festival" using warm colors.' },
+              { title: 'A cool picture', desc: 'Draw a "quiet night" using cool colors.' }
+            ],
+            task: { title: 'Warm-Cool Contrast', desc: 'Draw the same landscape twice — once warm, once cool — and feel the different moods.', tip: 'Warm colors suit sunlight; cool colors suit moonlight.' },
+            tips: ['Using warm and cool together works best.', 'Large cool areas plus small warm areas give a strong focal point.']
+          },
+          {
+            id: 'L2-3', title: 'The Emotions of Color', emoji: '😊', duration: '12 min', stars: 2,
+            intro: 'Colors can "speak" — different colors express different feelings.',
+            theory: [
+              'Red: warm and festive, but can also show anger.',
+              'Yellow: bright and happy. Blue: calm and a little blue.',
+              'Green: lively and natural. Purple: mysterious and noble.'
+            ],
+            steps: [
+              { title: 'Mood colors', desc: 'Pick a color group each for "happy", "angry", and "calm".' },
+              { title: 'Mood self-portrait', desc: 'Draw a picture in colors that show how you feel today.' }
+            ],
+            task: { title: 'Mood Palette', desc: 'Paint color-block groups for 4 moods and explain why you chose them.', tip: 'There’s no wrong answer — your feeling is what matters.' },
+            tips: ['A picture can show emotion with a main color plus accent colors.', 'Take turns guessing what mood your friend painted.']
+          },
+          {
+            id: 'L2-4', title: 'Gradient Coloring', emoji: '🌅', duration: '15 min', stars: 2,
+            intro: 'Let colors shift gradually to create beautiful skies and sunsets.',
+            theory: [
+              'A gradient goes from dark to light, or blends from one color into another.',
+              'How: color the light shade first, then layer darker color at the edges to blend.',
+              'Gradients add a sense of depth and space.'
+            ],
+            steps: [
+              { title: 'Single-color gradient', desc: 'Blend one color from dark to light.' },
+              { title: 'Two-color gradient', desc: 'Blend two colors smoothly, like blue into purple.' },
+              { title: 'Gradient sky', desc: 'Draw a landscape with a gradient sky.' }
+            ],
+            task: { title: 'A Beautiful Sunset', desc: 'Blend a sunset sky from orange to purple.', tip: 'Use light strokes where colors meet so they blend naturally.' },
+            tips: ['Gradients take patience — build them up layer by layer.', 'Use a third color to bridge where colors change.']
+          },
+          {
+            id: 'L2-5', title: 'Color Matching Pro', emoji: '🎯', duration: '15 min', stars: 3,
+            intro: 'Master the secrets of color matching for professional, harmonious pictures.',
+            theory: [
+              'Analogous colors sit next to each other on the wheel — soft and harmonious.',
+              'Complementary colors are opposite on the wheel (like red and green) — bold and striking.',
+              'Three main colors usually make the most harmonious picture.'
+            ],
+            steps: [
+              { title: 'Analogous practice', desc: 'Draw a picture with analogous colors (like yellow, yellow-orange, orange).' },
+              { title: 'Complementary practice', desc: 'Draw a picture with complementary colors (like blue and orange).' },
+              { title: 'Color challenge', desc: 'Try different color schemes on the same line drawing.' }
+            ],
+            task: { title: 'Color Master', desc: 'Design 3 different color schemes for the same picture.', tip: 'Use the AI Assistant’s "Smart Palette" feature for inspiration.' },
+            tips: ['Don’t use too many colors — 3 main ones is best.', 'Use one color as the main color and the others as accents.']
+          }
+        ]
+      },
+
+      /* ========== Stage 3：Form & Structure ========== */
+      {
+        id: 'L3',
+        name: 'Form & Structure',
+        subtitle: 'Perspective, Light & Space',
+        emoji: '📐',
+        color: '#4ECDC4',
+        desc: 'Turn "flat" drawings into 3D-looking ones. Learn to see and show volume and space.',
+        lessons: [
+          {
+            id: 'L3-1', title: 'Observation & Proportion', emoji: '👁️', duration: '15 min', stars: 2,
+            intro: 'Whether a drawing looks right comes down to correct proportions.',
+            theory: [
+              'Proportion: the size relationship between the parts of an object.',
+              'How to observe: find the overall width and height first, then place each part.',
+              'Use a grid to compare and position things.'
+            ],
+            steps: [
+              { title: 'See the whole', desc: 'Draw the object’s overall outline first.' },
+              { title: 'Find the center', desc: 'Find the center line and draw the two sides in relation to each other.' },
+              { title: 'Check proportions', desc: 'Step back, look at the whole, and adjust the proportions.' }
+            ],
+            task: { title: 'Proportion Challenge', desc: 'Look at a cup and draw a still life with accurate proportions.', tip: 'Use your pencil to measure and judge proportions.' },
+            tips: ['Draw the big relationships first, then the small details.', 'Often step back to see the whole picture.']
+          },
+          {
+            id: 'L3-2', title: 'Intro to Perspective', emoji: '🏠', duration: '18 min', stars: 3,
+            intro: 'Perspective gives a flat picture a feeling of near and far.',
+            theory: [
+              'Near things look big, far things look small.',
+              'Eye level: the line at the height of your eyes looking straight ahead.',
+              'One-point perspective: all the slanting lines meet at a single point.'
+            ],
+            steps: [
+              { title: 'Draw the horizon', desc: 'Draw a horizontal line on your paper as the eye level.' },
+              { title: 'Find the vanishing point', desc: 'Mark one vanishing point on the eye-level line.' },
+              { title: 'Draw perspective boxes', desc: 'Connect lines to the vanishing point to draw boxes in perspective.' },
+              { title: 'Build a street', desc: 'Draw a street using one-point perspective.' }
+            ],
+            task: { title: 'A Little Street in Perspective', desc: 'Draw a street with houses and a road in one-point perspective.', tip: 'Turn on the canvas "Grid" feature to help practice.' },
+            tips: ['All the lines should point toward the vanishing point.', 'Draw distant objects smaller and with paler colors.']
+          },
+          {
+            id: 'L3-3', title: 'Light, Shade & Shadow', emoji: '🌗', duration: '18 min', stars: 3,
+            intro: 'With light and shadow, objects start to look three-dimensional.',
+            theory: [
+              'The light source determines the lit side and the dark side.',
+              'Three main planes: light, mid-tone, and shadow.',
+              'Five tones: highlight, light, core shadow, reflected light, and cast shadow.'
+            ],
+            steps: [
+              { title: 'Draw a sphere', desc: 'Draw a circle and treat it as a sphere.' },
+              { title: 'Hatching', desc: 'Use diagonal hatching to show the transition from light to dark.' },
+              { title: 'Darken the shadows', desc: 'Press harder on the dark side, leaving the highlight light.' },
+              { title: 'Draw the cast shadow', desc: 'Draw a shadow underneath the sphere.' }
+            ],
+            task: { title: 'A 3D Sphere', desc: 'Use hatching to draw a sphere and a cylinder that look 3D.', tip: 'The core shadow belongs in the darkest area.' },
+            tips: ['Lay in the overall tones first, then work into details.', 'Leave the highlight as bright white.']
+          },
+          {
+            id: 'L3-4', title: 'Simple Still Life', emoji: '🍎', duration: '20 min', stars: 3,
+            intro: 'Draw a group of still-life objects using what you’ve learned.',
+            theory: [
+              'Composition: where objects are placed in the picture.',
+              'Make the main object detailed and the supporting objects simple.',
+              'Pay attention to which objects overlap and sit in front.'
+            ],
+            steps: [
+              { title: 'Arrange the layout', desc: 'Use a few shapes to fix the position of each object.' },
+              { title: 'Draw outlines', desc: 'Sketch the outline of each object.' },
+              { title: 'Add light & shade', desc: 'Use one consistent light source to create depth.' },
+              { title: 'Adjust', desc: 'Check the overall relationships and finish your work.' }
+            ],
+            task: { title: 'Fruit Still Life', desc: 'Draw a group of fruit, minding overlap and light and shade.', tip: 'Pick one consistent direction for the light.' },
+            tips: ['Connect the objects — don’t draw them as unrelated pieces.', 'A draped cloth can make the picture feel more complete.']
+          },
+          {
+            id: 'L3-5', title: 'Showing Texture', emoji: '✨', duration: '20 min', stars: 3,
+            intro: 'Different objects have different textures; learn to show them with brushstrokes.',
+            theory: [
+              'Smooth objects (like glass) have clear highlights and strong reflections.',
+              'Rough objects (like stone) have soft light-to-dark transitions.',
+              'Fuzzy objects (like a sweater) have soft, fluffy edges.'
+            ],
+            steps: [
+              { title: 'Observe texture', desc: 'Compare glass, wood, and fabric.' },
+              { title: 'Practice brushwork', desc: 'Use different strokes to show smooth and rough surfaces.' },
+              { title: 'A texture sketch', desc: 'Draw an object with contrasting textures.' }
+            ],
+            task: { title: 'Texture Challenge', desc: 'Show the different textures of a glass and a plush toy in one picture.', tip: 'Use the AI line-art feature to help observe the outlines.' },
+            tips: ['The shape of a highlight reveals the material.', 'Let your strokes follow the form of the object.']
+          }
+        ]
+      },
+
+      /* ========== Stage 4：Creative Skills ========== */
+      {
+        id: 'L4',
+        name: 'Creative Skills',
+        subtitle: 'People · Animals · Landscapes · Composition',
+        emoji: '🚀',
+        color: '#A29BFE',
+        desc: 'Now real creating begins! Learn to draw people, animals, and landscapes, and to organize your picture.',
+        lessons: [
+          {
+            id: 'L4-1', title: 'Human Proportions', emoji: '🧍', duration: '20 min', stars: 3,
+            intro: 'The key to drawing people is getting body proportions right.',
+            theory: [
+              'The head is your "ruler" for measuring the body.',
+              'Children: about 4-5 heads tall; adults: about 7-7.5 heads tall.',
+              'Standing is about seven heads; sitting is about five.'
+            ],
+            steps: [
+              { title: 'Set the proportions', desc: 'Draw a few circles to set the head-to-body proportions.' },
+              { title: 'Build the skeleton', desc: 'Use simple lines to capture the pose.' },
+              { title: 'Add the form', desc: 'Add body masses over the skeleton.' }
+            ],
+            task: { title: 'My Self-Portrait', desc: 'Draw a full-body self-portrait with correct proportions.', tip: 'Draw a "stick figure" pose first, then add the body.' },
+            tips: ['Mark the joints with small circles.', 'Mind the balance so the figure doesn’t fall over.']
+          },
+          {
+            id: 'L4-2', title: 'Features & Expressions', emoji: '😄', duration: '18 min', stars: 3,
+            intro: 'Small changes in facial features create rich expressions.',
+            theory: [
+              'Eyes: their size and the angle of the brows set the expression.',
+              'The "three sections and five eyes" rule guides facial proportions.',
+              'Expressions come from the brows, eyes, and mouth together.'
+            ],
+            steps: [
+              { title: 'Place the features', desc: 'Use the facial proportion rules to place the features.' },
+              { title: 'Draw eyes', desc: 'Practice drawing eyes of different shapes.' },
+              { title: 'Expression practice', desc: 'Draw four expressions: joy, anger, sadness, and happiness.' }
+            ],
+            task: { title: 'A Book of Expressions', desc: 'Draw 6 different expressions on the same face.', tip: 'Moving the eyebrows greatly changes an expression.' },
+            tips: ['Keep the features harmonious overall.', 'The eyes are the key to expression.']
+          },
+          {
+            id: 'L4-3', title: 'Drawing Animals', emoji: '🦊', duration: '20 min', stars: 3,
+            intro: 'Capture an animal’s features and it will come alive.',
+            theory: [
+              'Different animals have different body shapes.',
+              'Emphasize the most distinctive part (like a giraffe’s neck).',
+              'An animal’s movement comes from its bones and muscles.'
+            ],
+            steps: [
+              { title: 'Simplify the form', desc: 'Use geometric shapes to simplify the animal’s body.' },
+              { title: 'Grab the features', desc: 'Highlight the animal’s most recognizable part.' },
+              { title: 'Show movement', desc: 'Make the animal look like it’s moving.' }
+            ],
+            task: { title: 'My Favorite Animal', desc: 'Draw your favorite animal, emphasizing its features.', tip: 'You can find a reference image to observe first.' },
+            tips: ['An animal’s eyes matter — make them bright and lively.', 'Show fur with lines of varying density.']
+          },
+          {
+            id: 'L4-4', title: 'Landscapes & Skies', emoji: '🏞️', duration: '20 min', stars: 3,
+            intro: 'Draw wide-open landscapes and beautiful skies.',
+            theory: [
+              'Landscapes have foreground, middle ground, and background — keep the layers clear.',
+              'Background: pale colors and few details; foreground: rich colors and more detail.',
+              'Cloud shapes come from observation.'
+            ],
+            steps: [
+              { title: 'Separate the layers', desc: 'Decide on the front, middle, and far areas.' },
+              { title: 'Draw the sky', desc: 'Draw the clouds and the colors of the sky.' },
+              { title: 'Add scenery', desc: 'Add trees, mountains, and buildings.' }
+            ],
+            task: { title: 'The Beauty of Nature', desc: 'Draw a landscape with clear layers.', tip: 'Use atmospheric perspective (strong near, pale far) to show space.' },
+            tips: ['Give the sky a suitable share of the picture.', 'Draw the background simply and a bit hazy.']
+          },
+          {
+            id: 'L4-5', title: 'Rules of Composition', emoji: '📷', duration: '18 min', stars: 4,
+            intro: 'Good composition makes a picture more appealing.',
+            theory: [
+              'Rule of thirds: divide the picture into thirds; place the subject on an intersection.',
+              'Leading lines guide the viewer’s eye toward the subject.',
+              'Contrast in size, density, and temperature makes a picture more exciting.'
+            ],
+            steps: [
+              { title: 'Rule-of-thirds practice', desc: 'Turn on the grid and place the subject on an intersection.' },
+              { title: 'Draw leading lines', desc: 'Use roads or rivers to guide the eye.' },
+              { title: 'Composition challenge', desc: 'Draw the same subject with different compositions.' }
+            ],
+            task: { title: 'Composition Master', desc: 'Use the rule of thirds to make a work with a strong focal subject.', tip: 'Use the AI Assistant’s "Composition Analysis" to check your work.' },
+            tips: ['Don’t put the subject dead center.', 'Give the picture a visual center.']
+          }
+        ]
+      },
+
+      /* ========== Stage 5：The Master’s Path ========== */
+      {
+        id: 'L5',
+        name: 'The Master’s Path',
+        subtitle: 'Style, Creation & Self-Expression',
+        emoji: '👑',
+        color: '#F9CA24',
+        desc: 'Skill is only the beginning — expression is the goal. Find your own visual language and become a true young master.',
+        lessons: [
+          {
+            id: 'L5-1', title: 'Expressive Lines', emoji: '🖊️', duration: '20 min', stars: 4,
+            intro: 'Give your lines emotion and develop your own unique brushwork.',
+            theory: [
+              'Lines can express speed, strength, and emotion.',
+              'Different strokes: flowing, paused, trembling, and broken.',
+              'Every master has a signature line style.'
+            ],
+            steps: [
+              { title: 'Emotional lines', desc: 'Use lines to express "happy", "angry", and "calm".' },
+              { title: 'Brushwork experiment', desc: 'Try strokes with different tools and pressures.' },
+              { title: 'Stylish lines', desc: 'Find a line style you love.' }
+            ],
+            task: { title: 'A Symphony of Lines', desc: 'Create an expressive artwork using only lines.', tip: 'No color — rely purely on changes in the lines.' },
+            tips: ['Draw relaxed and your strokes will be natural.', 'Copying the masters is a great way to learn style.']
+          },
+          {
+            id: 'L5-2', title: 'Master of Light', emoji: '💡', duration: '22 min', stars: 4,
+            intro: 'Use light and shadow to build mood and drama.',
+            theory: [
+              'Strong light-dark contrast (chiaroscuro) makes the subject stand out.',
+              'Backlight, side light, and top light create different moods.',
+              'Light and shadow are the picture’s "mood switch".'
+            ],
+            steps: [
+              { title: 'Design the light', desc: 'Design an unusual light source for a picture.' },
+              { title: 'Boost contrast', desc: 'Increase the light-dark contrast for more drama.' },
+              { title: 'Create a mood', desc: 'Express a mood through light and shadow.' }
+            ],
+            task: { title: 'A Theater of Light', desc: 'Draw a work with strong light and shadow contrast.', tip: 'Use AI color analysis to check the light-dark distribution.' },
+            tips: ['Keep shadows unified and highlights concentrated.', 'Rim light can make the subject pop.']
+          },
+          {
+            id: 'L5-3', title: 'Exploring Styles', emoji: '🎭', duration: '22 min', stars: 4,
+            intro: 'Try different art styles to find the expression that suits you best.',
+            theory: [
+              'Common styles: realistic, cartoon, watercolor, oil painting, doodle, and minimalist.',
+              'Style = way of shaping + color + brushwork.',
+              'Experiment a lot to discover what you like.'
+            ],
+            steps: [
+              { title: 'Imitate a style', desc: 'Pick a style to copy.' },
+              { title: 'Mix styles', desc: 'Combine two styles together.' },
+              { title: 'Style experiment', desc: 'Create a unique style of your own.' }
+            ],
+            task: { title: 'Style Lab', desc: 'Draw the same subject in 3 different styles.', tip: 'Use the AI line-art feature to block in shapes quickly.' },
+            tips: ['Don’t settle too soon — keep exploring.', 'The style you love is a good style.']
+          },
+          {
+            id: 'L5-4', title: 'Thematic Creation', emoji: '📖', duration: '30 min', stars: 5,
+            intro: 'Create a complete work with a story and an idea.',
+            theory: [
+              'Creation begins with "what do I want to say?".',
+              'A theme takes five steps: idea, sketch, composition, development, and finish.',
+              'A good work resonates with its viewers.'
+            ],
+            steps: [
+              { title: 'Choose a theme', desc: 'Think of a theme you truly want to express.' },
+              { title: 'Gather references', desc: 'Find reference images and draw sketches.' },
+              { title: 'Develop the composition', desc: 'Refine the picture again and again.' },
+              { title: 'Finish the work', desc: 'Draw carefully and finish your work.' }
+            ],
+            task: { title: 'A Masterpiece', desc: 'Independently create a complete themed work and write a short note about it.', tip: 'Patience is a master’s most important virtue.' },
+            tips: ['Draw several sketches first and pick the best.', 'You can revisit earlier lessons anytime while creating.']
+          },
+          {
+            id: 'L5-5', title: 'My Master Gallery', emoji: '🏆', duration: 'Free', stars: 5,
+            intro: 'Congratulations on finishing every lesson! Now it’s time to show your work.',
+            theory: [
+              'Organize your works and look back at how far you’ve come.',
+              'Learn to appreciate and evaluate art — including your own.',
+              'The road of art has no end — keep your passion and keep going.'
+            ],
+            steps: [
+              { title: 'Organize works', desc: 'Arrange your works in the gallery.' },
+              { title: 'Self-review', desc: 'Compare your first picture with your latest.' },
+              { title: 'Share & show', desc: 'Introduce your works to family and friends.' }
+            ],
+            task: { title: 'Graduation Show', desc: 'Pick your 5 favorite works and hold your own "art exhibition".', tip: 'You’re a Drawing Master now!' },
+            tips: ['Give each work a name.', 'Remember: passion is the best teacher.']
+          }
+        ]
+      }
+    ]
+  };
+
+  // Stats
+  window.COURSE_STATS = (function () {
+    var total = 0;
+    window.COURSE_DATA.levels.forEach(function (lv) { total += lv.lessons.length; });
+    return { levels: window.COURSE_DATA.levels.length, lessons: total };
+  })();
+
+})(window);
+
+
+/* ============================================================
+ * Drawing Master · Drawing Engine
+ * Pure Canvas 2D: multiple brushes / undo-redo / grid / mirror / reference image
+ * ============================================================ */
+(function (global) {
+  'use strict';
+
+  var MAX_HISTORY = 40;
+
+  function DrawingEngine(opts) {
+    this.stage = opts.stage;
+    this.drawCanvas = opts.drawCanvas;
+    this.gridCanvas = opts.gridCanvas;
+    this.refImg = opts.refImg;
+    this.ctx = this.drawCanvas.getContext('2d');
+    this.gridCtx = this.gridCanvas.getContext('2d');
+
+    this.W = opts.width || 1000;
+    this.H = opts.height || 700;
+    this.drawCanvas.width = this.W;
+    this.drawCanvas.height = this.H;
+    this.gridCanvas.width = this.W;
+    this.gridCanvas.height = this.H;
+
+    // tool state
+    this.tool = 'pencil';       // pencil | brush | marker | watercolor | spray | eraser
+    this.color = '#333333';
+    this.size = 6;
+    this.opacity = 1;
+    this.mirror = false;
+    this.gridOn = false;
+
+    // drawing state
+    this.drawing = false;
+    this.lastPos = null;
+    this.points = [];
+
+    // history
+    this.history = [];
+    this.hIndex = -1;
+
+    this._bindEvents();
+    this.initHistory();
+  }
+
+  DrawingEngine.prototype = {
+
+    /* ---------- event binding ---------- */
+    _bindEvents: function () {
+      var self = this;
+      var c = this.drawCanvas;
+
+      var start = function (e) {
+        e.preventDefault();
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        self.drawing = true;
+        var p = self._getPos(e);
+        self.lastPos = p;
+        self.points = [p];
+        self._strokeStart(p, e.pressure || 0.5);
+        c.setPointerCapture && c.setPointerCapture(e.pointerId);
+      };
+      var move = function (e) {
+        if (!self.drawing) return;
+        e.preventDefault();
+        var p = self._getPos(e);
+        self.points.push(p);
+        self._strokeMove(self.lastPos, p, e.pressure || 0.5);
+        self.lastPos = p;
+      };
+      var end = function (e) {
+        if (!self.drawing) return;
+        self.drawing = false;
+        self._strokeEnd();
+        self.commit();
+      };
+
+      c.addEventListener('pointerdown', start);
+      c.addEventListener('pointermove', move);
+      c.addEventListener('pointerup', end);
+      c.addEventListener('pointercancel', end);
+      c.addEventListener('pointerleave', function (e) { if (self.drawing) end(e); });
+      // prevent touch scroll
+      c.style.touchAction = 'none';
+    },
+
+    _getPos: function (e) {
+      var r = this.drawCanvas.getBoundingClientRect();
+      return {
+        x: (e.clientX - r.left) * (this.W / r.width),
+        y: (e.clientY - r.top) * (this.H / r.height)
+      };
+    },
+
+    /* ---------- brush implementation ---------- */
+    _applyBrushStyle: function (pressure) {
+      var ctx = this.ctx;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.globalAlpha = this.opacity;
+      if (this.tool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.lineWidth = this.size * 2.2;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = this.color;
+        ctx.fillStyle = this.color;
+        var pressureFactor = 0.7 + (pressure || 0.5) * 0.6;
+        ctx.lineWidth = this.size * pressureFactor;
+      }
+    },
+
+    _strokeStart: function (p, pressure) {
+      var ctx = this.ctx;
+      this._applyBrushStyle(pressure);
+      ctx.beginPath();
+      if (this.tool === 'spray') {
+        this._spray(p);
+      } else if (this.tool === 'watercolor') {
+        ctx.globalAlpha = this.opacity * 0.25;
+        ctx.arc(p.x, p.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x + 0.1, p.y + 0.1);
+        ctx.stroke();
+      }
+      if (this.mirror) this._mirrorPoint(p, pressure);
+    },
+
+    _strokeMove: function (p1, p2, pressure) {
+      var ctx = this.ctx;
+      this._applyBrushStyle(pressure);
+      ctx.beginPath();
+      if (this.tool === 'spray') {
+        var dist = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+        var steps = Math.max(1, Math.round(dist / 3));
+        for (var i = 0; i <= steps; i++) {
+          var t = i / steps;
+          this._spray({ x: p1.x + (p2.x - p1.x) * t, y: p1.y + (p2.y - p1.y) * t });
+        }
+      } else if (this.tool === 'watercolor') {
+        ctx.globalAlpha = this.opacity * 0.18;
+        var mx = (p1.x + p2.x) / 2, my = (p1.y + p2.y) / 2;
+        ctx.moveTo(p1.x, p1.y);
+        ctx.quadraticCurveTo(p1.x, p1.y, mx, my);
+        ctx.stroke();
+      } else {
+        var mx2 = (p1.x + p2.x) / 2, my2 = (p1.y + p2.y) / 2;
+        ctx.moveTo(p1.x, p1.y);
+        ctx.quadraticCurveTo(p1.x, p1.y, mx2, my2);
+        ctx.stroke();
+      }
+      if (this.mirror) this._mirrorSegment(p1, p2, pressure);
+    },
+
+    _strokeEnd: function () {
+      this.ctx.globalAlpha = 1;
+      this.ctx.globalCompositeOperation = 'source-over';
+    },
+
+    _spray: function (p) {
+      var ctx = this.ctx;
+      var density = Math.max(3, this.size * 1.5);
+      var radius = this.size * 1.6;
+      ctx.globalAlpha = this.opacity * 0.5;
+      for (var i = 0; i < density; i++) {
+        var a = Math.random() * Math.PI * 2;
+        var r = Math.random() * radius;
+        ctx.fillRect(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r, 1.2, 1.2);
+      }
+    },
+
+    _mirrorPoint: function (p, pressure) {
+      var ctx = this.ctx;
+      var mp = { x: this.W - p.x, y: p.y };
+      this._applyBrushStyle(pressure);
+      ctx.beginPath();
+      if (this.tool === 'spray') this._spray(mp);
+      else if (this.tool === 'watercolor') { ctx.globalAlpha = this.opacity * 0.25; ctx.arc(mp.x, mp.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+      else { ctx.moveTo(mp.x, mp.y); ctx.lineTo(mp.x + 0.1, mp.y + 0.1); ctx.stroke(); }
+    },
+
+    _mirrorSegment: function (p1, p2, pressure) {
+      var ctx = this.ctx;
+      var m1 = { x: this.W - p1.x, y: p1.y };
+      var m2 = { x: this.W - p2.x, y: p2.y };
+      this._applyBrushStyle(pressure);
+      ctx.beginPath();
+      if (this.tool === 'spray') {
+        var dist = Math.hypot(m2.x - m1.x, m2.y - m1.y);
+        var steps = Math.max(1, Math.round(dist / 3));
+        for (var i = 0; i <= steps; i++) { var t = i / steps; this._spray({ x: m1.x + (m2.x - m1.x) * t, y: m1.y + (m2.y - m1.y) * t }); }
+      } else {
+        var mx = (m1.x + m2.x) / 2, my = (m1.y + m2.y) / 2;
+        ctx.moveTo(m1.x, m1.y);
+        ctx.quadraticCurveTo(m1.x, m1.y, mx, my);
+        ctx.stroke();
+      }
+    },
+
+    /* ---------- tool settings ---------- */
+    setTool: function (t) { this.tool = t; },
+    setColor: function (c) { this.color = c; },
+    setSize: function (s) { this.size = parseInt(s, 10); },
+    setOpacity: function (o) { this.opacity = parseFloat(o); },
+    setMirror: function (v) { this.mirror = !!v; },
+
+    /* ---------- grid ---------- */
+    toggleGrid: function (force) {
+      this.gridOn = (typeof force === 'boolean') ? force : !this.gridOn;
+      this._drawGrid();
+      return this.gridOn;
+    },
+    _drawGrid: function () {
+      var ctx = this.gridCtx;
+      ctx.clearRect(0, 0, this.W, this.H);
+      if (!this.gridOn) return;
+      var step = 50;
+      ctx.strokeStyle = 'rgba(120,120,160,0.25)';
+      ctx.lineWidth = 1;
+      for (var x = 0; x <= this.W; x += step) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.H); ctx.stroke(); }
+      for (var y = 0; y <= this.H; y += step) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.W, y); ctx.stroke(); }
+      // thirds lines
+      ctx.strokeStyle = 'rgba(255,107,157,0.45)';
+      ctx.lineWidth = 1.5;
+      [1, 2].forEach(function (i) {
+        ctx.beginPath(); ctx.moveTo(this.W * i / 3, 0); ctx.lineTo(this.W * i / 3, this.H); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(0, this.H * i / 3); ctx.lineTo(this.W, this.H * i / 3); ctx.stroke();
+      }, this);
+    },
+
+    /* ---------- reference image (tracing) ---------- */
+    setReference: function (url) {
+      if (!url) { this.refImg.style.display = 'none'; this.refImg.src = ''; return; }
+      this.refImg.src = url;
+      this.refImg.style.display = 'block';
+    },
+    setRefOpacity: function (v) { this.refImg.style.opacity = v; },
+
+    /* ---------- undo / redo ---------- */
+    initHistory: function () {
+      this.history = [this.drawCanvas.toDataURL('image/png')];
+      this.hIndex = 0;
+    },
+    commit: function () {
+      this.history = this.history.slice(0, this.hIndex + 1);
+      this.history.push(this.drawCanvas.toDataURL('image/png'));
+      if (this.history.length > MAX_HISTORY) this.history.shift();
+      this.hIndex = this.history.length - 1;
+    },
+    _restore: function (index) {
+      var self = this;
+      var img = new Image();
+      img.onload = function () {
+        self.ctx.clearRect(0, 0, self.W, self.H);
+        self.ctx.drawImage(img, 0, 0, self.W, self.H);
+      };
+      img.src = this.history[index];
+    },
+    undo: function () { if (this.hIndex > 0) { this.hIndex--; this._restore(this.hIndex); return true; } return false; },
+    redo: function () { if (this.hIndex < this.history.length - 1) { this.hIndex++; this._restore(this.hIndex); return true; } return false; },
+    canUndo: function () { return this.hIndex > 0; },
+    canRedo: function () { return this.hIndex < this.history.length - 1; },
+
+    /* ---------- canvas actions ---------- */
+    clear: function () {
+      this.ctx.clearRect(0, 0, this.W, this.H);
+      this.commit();
+    },
+    isEmpty: function () {
+      var d = this.ctx.getImageData(0, 0, this.W, this.H).data;
+      for (var i = 3; i < d.length; i += 4) if (d[i] !== 0) return false;
+      return true;
+    },
+
+    /* ---------- export / load ---------- */
+    exportPNG: function () {
+      var out = document.createElement('canvas');
+      out.width = this.W; out.height = this.H;
+      var ctx = out.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, this.W, this.H);
+      ctx.drawImage(this.drawCanvas, 0, 0);
+      return out.toDataURL('image/png');
+    },
+    loadImage: function (dataUrl, callback) {
+      var self = this;
+      var img = new Image();
+      img.onload = function () {
+        self.ctx.clearRect(0, 0, self.W, self.H);
+        self.ctx.drawImage(img, 0, 0, self.W, self.H);
+        self.commit();
+        callback && callback();
+      };
+      img.src = dataUrl;
+    },
+    getPixelData: function () { return this.ctx.getImageData(0, 0, this.W, this.H); },
+    putPixelData: function (imgData) { this.ctx.putImageData(imgData, 0, 0); this.commit(); }
+  };
+
+  global.DrawingEngine = DrawingEngine;
+
+})(window);
+
+
+/* ============================================================
+ * Drawing Master · AI Helper (open-source computer vision)
+ * Features: line art / color analysis / composition / palettes / scoring
+ * All algorithms are classic open-source CV ideas, running fully in-browser, offline
+ * ============================================================ */
+(function (global) {
+  'use strict';
+
+  var AI = {};
+
+  /* ---------- Utilities ---------- */
+  function scaledData(canvas, maxDim) {
+    maxDim = maxDim || 360;
+    var scale = Math.min(1, maxDim / Math.max(canvas.width, canvas.height));
+    var tmp = document.createElement('canvas');
+    tmp.width = Math.max(1, Math.round(canvas.width * scale));
+    tmp.height = Math.max(1, Math.round(canvas.height * scale));
+    var ctx = tmp.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, tmp.width, tmp.height);
+    ctx.drawImage(canvas, 0, 0, tmp.width, tmp.height);
+    return { data: ctx.getImageData(0, 0, tmp.width, tmp.height), w: tmp.width, h: tmp.height };
+  }
+
+  function rgb2hsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h = 0, s = 0, l = (max + min) / 2;
+    var d = max - min;
+    if (d !== 0) {
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+    return { h: h * 360, s: s, l: l };
+  }
+
+  function hsl2hex(h, s, l) {
+    h = (h % 360 + 360) % 360; s /= 100; l /= 100;
+    var c = (1 - Math.abs(2 * l - 1)) * s;
+    var x = c * (1 - Math.abs((h / 60) % 2 - 1));
+    var m = l - c / 2;
+    var r = 0, g = 0, b = 0;
+    if (h < 60) { r = c; g = x; } else if (h < 120) { r = x; g = c; }
+    else if (h < 180) { g = c; b = x; } else if (h < 240) { g = x; b = c; }
+    else if (h < 300) { r = x; b = c; } else { r = c; b = x; }
+    function to(v) { return Math.round((v + m) * 255).toString(16).padStart(2, '0'); }
+    return '#' + to(r) + to(g) + to(b);
+  }
+
+  function colorName(h, s, l) {
+    if (l > 0.9) return 'White';
+    if (l < 0.12) return 'Black';
+    if (s < 0.12) return 'Gray';
+    var names = ['Red', 'Orange', 'Yellow', 'Yellow-Green', 'Green', 'Teal', 'Cyan', 'Blue', 'Blue-Violet', 'Purple', 'Magenta', 'Pink'];
+    return names[Math.round(h / 30) % 12];
+  }
+
+  /* ============================================================
+   * 1. Photo to line art (Sobel edge detection + binarization)
+   * ============================================================ */
+  AI.toLineArt = function (sourceCanvas, strength) {
+    strength = strength || 1;
+    var W = sourceCanvas.width, H = sourceCanvas.height;
+    var tmp = document.createElement('canvas');
+    tmp.width = W; tmp.height = H;
+    var ctx = tmp.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(sourceCanvas, 0, 0, W, H);
+    var src = ctx.getImageData(0, 0, W, H);
+    var d = src.data;
+    var gray = new Float32Array(W * H);
+    for (var i = 0; i < W * H; i++) {
+      gray[i] = 0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2];
+    }
+    // Sobel
+    var out = ctx.createImageData(W, H);
+    var o = out.data;
+    var threshold = 60 / strength;
+    for (var y = 1; y < H - 1; y++) {
+      for (var x = 1; x < W - 1; x++) {
+        var idx = y * W + x;
+        var gx = -gray[idx - W - 1] - 2 * gray[idx - 1] - gray[idx + W - 1]
+               + gray[idx - W + 1] + 2 * gray[idx + 1] + gray[idx + W + 1];
+        var gy = -gray[idx - W - 1] - 2 * gray[idx - W] - gray[idx - W + 1]
+               + gray[idx + W - 1] + 2 * gray[idx + W] + gray[idx + W + 1];
+        var g = Math.sqrt(gx * gx + gy * gy);
+        var v = g > threshold ? 25 : 255;
+        var p = idx * 4;
+        o[p] = v; o[p + 1] = v; o[p + 2] = v; o[p + 3] = 255;
+      }
+    }
+    ctx.putImageData(out, 0, 0);
+    return tmp.toDataURL('image/png');
+  };
+
+  /* ============================================================
+   * 2. Color analysis (main colors / warm-cool / richness)
+   * ============================================================ */
+  AI.analyzeColors = function (canvas) {
+    var s = scaledData(canvas, 320);
+    var d = s.data.data;
+    var bins = {}; // 12 hues x 3 lightness
+    var warm = 0, cool = 0, neutral = 0, total = 0;
+    var colored = 0;
+    for (var i = 0; i < d.length; i += 4) {
+      var r = d[i], g = d[i + 1], b = d[i + 2], a = d[i + 3];
+      if (a < 30) continue;
+      var hsl = rgb2hsl(r, g, b);
+      if (hsl.l > 0.95 || hsl.l < 0.06) continue; // skip pure black and white
+      total++;
+      var hb = Math.floor(hsl.h / 30) % 12;
+      var lb = hsl.l < 0.33 ? 0 : (hsl.l < 0.66 ? 1 : 2);
+      var key = hb + '-' + lb;
+      if (!bins[key]) bins[key] = { h: hb * 30 + 15, s: hsl.s, l: hsl.l, count: 0 };
+      bins[key].count++;
+      bins[key].s = (bins[key].s + hsl.s) / 2;
+      bins[key].l = (bins[key].l + hsl.l) / 2;
+      if (hsl.s < 0.12) neutral++;
+      else if (hsl.h < 60 || hsl.h >= 300) warm++;
+      else cool++;
+      if (hsl.s > 0.2) colored++;
+    }
+    if (total === 0) total = 1;
+    var arr = Object.keys(bins).map(function (k) { return bins[k]; });
+    arr.sort(function (a, b) { return b.count - a.count; });
+    var top = arr.slice(0, 6).map(function (x) {
+      return {
+        hex: hsl2hex(x.h, Math.min(90, x.s * 100), Math.min(85, Math.max(25, x.l * 100))),
+        name: colorName(x.h, x.s, x.l),
+        percent: Math.round(x.count / total * 100)
+      };
+    });
+    return {
+      topColors: top,
+      warm: Math.round(warm / total * 100),
+      cool: Math.round(cool / total * 100),
+      neutral: Math.round(neutral / total * 100),
+      richness: Math.min(100, Math.round(colored / total * 100 * 1.6)),
+      distinctHues: arr.length
+    };
+  };
+
+  /* ============================================================
+   * 3. Composition (3x3 weight + rule-of-thirds)
+   * ============================================================ */
+  AI.analyzeComposition = function (canvas) {
+    var s = scaledData(canvas, 300);
+    var d = s.data.data, w = s.w, h = s.h;
+    var grid = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    var total = 0;
+    for (var y = 0; y < h; y++) {
+      for (var x = 0; x < w; x++) {
+        var i = (y * w + x) * 4;
+        var r = d[i], g = d[i + 1], b = d[i + 2];
+        // difference from white paper as"content weight"
+        var diff = (255 - r) + (255 - g) + (255 - b);
+        if (diff > 45) {
+          var gx = Math.min(2, Math.floor(x / w * 3));
+          var gy = Math.min(2, Math.floor(y / h * 3));
+          grid[gy][gx] += 1;
+          total++;
+        }
+      }
+    }
+    if (total === 0) total = 1;
+    var max = 0, mx = 1, my = 1;
+    for (var yy = 0; yy < 3; yy++) for (var xx = 0; xx < 3; xx++) {
+      if (grid[yy][xx] > max) { max = grid[yy][xx]; mx = xx; my = yy; }
+    }
+    var centerWeight = Math.round(grid[1][1] / total * 100);
+    var onThirds = (mx !== 1 || my !== 1);
+    var balance = 100 - Math.round(max / total * 100 * 1.4);
+    balance = Math.max(0, Math.min(100, balance));
+    return {
+      grid: grid.map(function (row) { return row.map(function (v) { return Math.round(v / total * 100); }); }),
+      focus: { x: mx, y: my },
+      onThirds: onThirds,
+      centerWeight: centerWeight,
+      balance: balance,
+      suggestion: onThirds
+        ? 'Subject sits near the thirds — nice composition!'
+        : 'Subject is centered — try moving it to a third of the frame for more life.'
+    };
+  };
+
+  /* ============================================================
+   * 4. Smart palettes (generated by color theory)
+   * ============================================================ */
+  AI.colorSchemes = function (baseHex) {
+    var hsl = rgb2hsl(
+      parseInt(baseHex.slice(1, 3), 16),
+      parseInt(baseHex.slice(3, 5), 16),
+      parseInt(baseHex.slice(5, 7), 16)
+    );
+    var h = hsl.h;
+    return [
+      { name: 'Analogous harmony', desc: 'Neighboring colors on the wheel — soft and unified', colors: [h - 30, h - 15, h, h + 15, h + 30].map(function (x) { return hsl2hex(x, 65, 55); }) },
+      { name: 'Bold contrast', desc: 'Main + complementary colors — bold and lively', colors: [hsl2hex(h, 70, 50), hsl2hex(h + 180, 70, 50), hsl2hex(h, 45, 75), hsl2hex(h + 180, 45, 35), hsl2hex(h + 30, 60, 60)] },
+      { name: 'Triadic balance', desc: 'Three evenly spaced colors — rich and harmonious', colors: [h, h + 120, h + 240, h + 60, h + 300].map(function (x) { return hsl2hex(x, 65, 55); }) },
+      { name: 'Split complementary', desc: 'A softer, refined take on complementary', colors: [h, h + 150, h + 210, h + 30, h + 180].map(function (x) { return hsl2hex(x, 62, 55); }) }
+    ];
+  };
+
+  /* ============================================================
+   * 5. Artwork scoring (heuristic, encouraging feedback)
+   * ============================================================ */
+  AI.evaluateArtwork = function (canvas) {
+    var s = scaledData(canvas, 300);
+    var d = s.data.data;
+    var colored = 0, total = 0, luminances = [], nonWhite = 0;
+    for (var i = 0; i < d.length; i += 4) {
+      var r = d[i], g = d[i + 1], b = d[i + 2], a = d[i + 3];
+      if (a < 30) continue;
+      total++;
+      var lum = 0.299 * r + 0.587 * g + 0.114 * b;
+      luminances.push(lum);
+      if (lum < 245) nonWhite++;
+      var hsl = rgb2hsl(r, g, b);
+      if (hsl.s > 0.18 && hsl.l > 0.08 && hsl.l < 0.94) colored++;
+    }
+    if (total === 0) total = 1;
+    var comp = AI.analyzeComposition(canvas);
+    var colors = AI.analyzeColors(canvas);
+
+    // dimension scores
+    var coverage = Math.min(100, Math.round(nonWhite / total * 100 * 2.2)); // completeness
+    var colorScore = Math.min(100, Math.round(colored / total * 100 * 1.8)); // color
+    var lumMin = Math.min.apply(null, luminances), lumMax = Math.max.apply(null, luminances);
+    var tonal = Math.min(100, Math.round((lumMax - lumMin) / 2.2));          // Light & shade
+    var composition = Math.round((comp.balance + (comp.onThirds ? 90 : 60)) / 2); // composition
+
+    var overall = Math.round(coverage * 0.25 + colorScore * 0.28 + tonal * 0.22 + composition * 0.25);
+    var stars = overall >= 85 ? 5 : overall >= 70 ? 4 : overall >= 55 ? 3 : overall >= 35 ? 2 : 1;
+
+    var praise = overall >= 85 ? 'Amazing! This already looks like a master’s work!'
+      : overall >= 70 ? 'Excellent! You keep getting better!'
+      : overall >= 55 ? 'Very nice! A few more details would make it shine.'
+      : overall >= 35 ? 'Looking good! Keep drawing boldly.'
+      : 'Putting pen to paper is the best start — keep practicing!';
+
+    return {
+      overall: overall, stars: stars, praise: praise,
+      dimensions: [
+        { name: 'Completeness', score: coverage, tip: coverage < 50 ? 'Could be richer — try filling more of the page.' : 'Nicely filled and complete.' },
+        { name: 'Color use', score: colorScore, tip: colorScore < 50 ? 'Try more colors to make it brighter.' : 'Great use of color — beautiful!' },
+        { name: 'Light & shade', score: tonal, tip: tonal < 50 ? 'Add light-to-dark variation for more depth.' : 'Strong light and shade — very 3D.' },
+        { name: 'Composition', score: composition, tip: comp.suggestion }
+      ],
+      colorReport: colors,
+      compositionReport: comp
+    };
+  };
+
+  global.AIAssistant = AI;
+
+})(window);
+
+
+/* ============================================================
+ * Drawing Master · Progress (localStorage persistence)
+ * Tracks lesson progress / gallery / XP levels / badges
+ * ============================================================ */
+(function (global) {
+  'use strict';
+
+  var KEY = 'huabi_master_v1';
+
+  var BADGES = [
+    { id: 'first', name: 'First Steps', emoji: '🌱', desc: 'Finish your first lesson', check: function (p) { return p.completed.length >= 1; } },
+    { id: 'lines', name: 'Line Pro', emoji: '✏️', desc: 'Finish the Star Beginner stage', check: function (p) { return stageDone(p, 'L1'); } },
+    { id: 'color', name: 'Color Magician', emoji: '🌈', desc: 'Finish the Color Magic stage', check: function (p) { return stageDone(p, 'L2'); } },
+    { id: 'shape', name: 'Form Master', emoji: '📐', desc: 'Finish the Form & Structure stage', check: function (p) { return stageDone(p, 'L3'); } },
+    { id: 'creator', name: 'Creative Pioneer', emoji: '🚀', desc: 'Finish the Creative Skills stage', check: function (p) { return stageDone(p, 'L4'); } },
+    { id: 'master', name: 'Drawing Master', emoji: '👑', desc: 'Finish all lessons', check: function (p) { return p.completed.length >= totalLessons(); } },
+    { id: 'prolific', name: 'Prolific Artist', emoji: '🖼️', desc: 'Save 10 artworks', check: function (p) { return p.works.length >= 10; } },
+    { id: 'persistent', name: 'Persistent', emoji: '🔥', desc: 'Draw 20 times', check: function (p) { return p.drawCount >= 20; } }
+  ];
+
+  function totalLessons() {
+    if (!window.COURSE_STATS) return 25;
+    return window.COURSE_STATS.lessons;
+  }
+  function stageDone(p, stageId) {
+    var lv = window.COURSE_DATA && window.COURSE_DATA.levels.find(function (l) { return l.id === stageId; });
+    if (!lv) return false;
+    return lv.lessons.every(function (l) { return p.completed.indexOf(l.id) >= 0; });
+  }
+
+  function defaultData() {
+    return {
+      completed: [],      // completed lesson ids
+      works: [],          // works [{id,title,data,course,time,stars}]
+      drawCount: 0,       // draw count
+      exp: 0,             // XP
+      badges: [],         // earned badge ids
+      lastVisit: Date.now()
+    };
+  }
+
+  var Progress = {
+    _data: null,
+
+    init: function () {
+      try {
+        var raw = localStorage.getItem(KEY);
+        this._data = raw ? JSON.parse(raw) : defaultData();
+      } catch (e) { this._data = defaultData(); }
+      // fill missing fields
+      var d = defaultData();
+      for (var k in d) if (!(k in this._data)) this._data[k] = d[k];
+      this._data.lastVisit = Date.now();
+      this.save();
+      return this._data;
+    },
+
+    save: function () {
+      try { localStorage.setItem(KEY, JSON.stringify(this._data)); }
+      catch (e) { console.warn('Save failed (storage may be full)', e); }
+    },
+
+    get: function () { return this._data; },
+
+    /* ---------- lesson progress ---------- */
+    completeLesson: function (lessonId) {
+      if (this._data.completed.indexOf(lessonId) < 0) {
+        this._data.completed.push(lessonId);
+        this.addExp(30);
+        this.save();
+        return true;
+      }
+      return false;
+    },
+    isCompleted: function (lessonId) { return this._data.completed.indexOf(lessonId) >= 0; },
+    progressPercent: function () { return Math.round(this._data.completed.length / totalLessons() * 100); },
+
+    /* ---------- XP & levels ---------- */
+    addExp: function (n) { this._data.exp += n; this.checkBadges(); this.save(); },
+    level: function () {
+      var exp = this._data.exp;
+      return Math.max(1, Math.floor(Math.sqrt(exp / 100)) + 1);
+    },
+    expToNext: function () {
+      var lv = this.level();
+      return Math.pow(lv, 2) * 100 - this._data.exp;
+    },
+    expInLevel: function () {
+      var lv = this.level();
+      var prev = Math.pow(lv - 1, 2) * 100;
+      return this._data.exp - prev;
+    },
+    expNeeded: function () {
+      var lv = this.level();
+      return Math.pow(lv, 2) * 100 - Math.pow(lv - 1, 2) * 100;
+    },
+
+    /* ---------- works ---------- */
+    addWork: function (title, dataUrl, course, stars) {
+      var work = {
+        id: 'W' + Date.now() + Math.floor(Math.random() * 1000),
+        title: title || 'My artwork',
+        data: this._compress(dataUrl),
+        course: course || 'Free drawing',
+        time: Date.now(),
+        stars: stars || 0
+      };
+      this._data.works.unshift(work);
+      this._data.drawCount++;
+      this.addExp(15);
+      this.save();
+      return work;
+    },
+    removeWork: function (id) {
+      this._data.works = this._data.works.filter(function (w) { return w.id !== id; });
+      this.save();
+    },
+    getWorks: function () { return this._data.works; },
+
+    _compress: function (dataUrl) {
+      // compress to thumbnail to save local storage
+      try {
+        var img = new Image();
+        // sync: process with canvas immediately
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        // a temp Image can’t be read synchronously, so return the original,
+        // caller handles compression before saving
+        return dataUrl;
+      } catch (e) { return dataUrl; }
+    },
+
+    /* ---------- badges ---------- */
+    checkBadges: function () {
+      var self = this;
+      var newBadges = [];
+      BADGES.forEach(function (b) {
+        if (self._data.badges.indexOf(b.id) < 0 && b.check(self._data)) {
+          self._data.badges.push(b.id);
+          newBadges.push(b);
+          self._data.exp += 50;
+        }
+      });
+      this._lastNewBadges = newBadges;
+      return newBadges;
+    },
+    getBadges: function () { return BADGES; },
+    hasBadge: function (id) { return this._data.badges.indexOf(id) >= 0; },
+    getNewBadges: function () { return this._lastNewBadges || []; },
+
+    /* ---------- reset ---------- */
+    reset: function () { this._data = defaultData(); this.save(); }
+  };
+
+  // sync compression helper (call after image onload, returns dataURL)
+  Progress.compressImage = function (dataUrl, maxDim, quality) {
+    maxDim = maxDim || 640;
+    quality = quality || 0.8;
+    return new Promise(function (resolve) {
+      var img = new Image();
+      img.onload = function () {
+        var scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.width * scale);
+        c.height = Math.round(img.height * scale);
+        var ctx = c.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, c.width, c.height);
+        ctx.drawImage(img, 0, 0, c.width, c.height);
+        try { resolve(c.toDataURL('image/jpeg', quality)); }
+        catch (e) { resolve(dataUrl); }
+      };
+      img.onerror = function () { resolve(dataUrl); };
+      img.src = dataUrl;
+    });
+  };
+
+  global.Progress = Progress;
+
+})(window);
+
+
+/* ============================================================
+ * Drawing Master · App Controller
+ * ============================================================ */
+(function (global) {
+  'use strict';
+
+  var App = {
+    engine: null,
+    activeLesson: null,   // currently practicing lesson object
+    currentTab: 'studio',
+    lineArtData: null,
+
+    /* ================= Init ================= */
+    init: function () {
+      Progress.init();
+
+      this.engine = new DrawingEngine({
+        stage: document.getElementById('canvasStage'),
+        drawCanvas: document.getElementById('drawCanvas'),
+        gridCanvas: document.getElementById('gridCanvas'),
+        refImg: document.getElementById('refImg'),
+        width: 1000, height: 700
+      });
+
+      this.bindNav();
+      this.bindStudio();
+      this.bindAI();
+      this.renderCourses();
+      this.renderPractice();
+      this.bindGallery();
+      this.bindProfile();
+      this.refreshUserBox();
+
+      // Shortcuts
+      document.addEventListener('keydown', this.onKey.bind(this));
+    },
+
+    /* ================= Navigation ================= */
+    bindNav: function () {
+      var self = this;
+      document.querySelectorAll('[data-tab]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var tab = el.getAttribute('data-tab');
+          self.switchTab(tab);
+        });
+      });
+    },
+    switchTab: function (tab) {
+      this.currentTab = tab;
+      document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
+      var page = document.getElementById('page-' + tab);
+      if (page) page.classList.add('active');
+      document.querySelectorAll('.nav-tab, .mtab').forEach(function (t) {
+        t.classList.toggle('active', t.getAttribute('data-tab') === tab);
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (tab === 'gallery') this.renderGallery();
+      if (tab === 'profile') this.renderProfile();
+      if (tab === 'courses') this.refreshCourseProgress();
+    },
+
+    /* ================= Studio bindings ================= */
+    bindStudio: function () {
+      var self = this;
+      var e = this.engine;
+
+      // Brushes
+      document.getElementById('toolGrid').addEventListener('click', function (ev) {
+        var btn = ev.target.closest('.tool-btn');
+        if (!btn) return;
+        document.querySelectorAll('.tool-btn').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        e.setTool(btn.dataset.tool);
+        self.updateBrushInfo();
+      });
+
+      // Colors
+      var picker = document.getElementById('colorPicker');
+      picker.addEventListener('input', function () {
+        e.setColor(picker.value);
+        document.getElementById('currentColorHex').textContent = picker.value;
+        document.querySelectorAll('.palette .swatch').forEach(function (s) {
+          s.classList.toggle('active', s.dataset.color.toLowerCase() === picker.value.toLowerCase());
+        });
+      });
+      this.renderPalette();
+
+      // Size / opacity
+      var size = document.getElementById('sizeSlider');
+      size.addEventListener('input', function () {
+        e.setSize(size.value);
+        document.getElementById('sizeValue').textContent = size.value;
+        self.updateBrushInfo();
+      });
+      var opacity = document.getElementById('opacitySlider');
+      opacity.addEventListener('input', function () {
+        e.setOpacity(opacity.value / 100);
+        document.getElementById('opacityValue').textContent = opacity.value + '%';
+      });
+
+      // Action buttons
+      document.getElementById('undoBtn').addEventListener('click', function () {
+        if (!e.undo()) self.toast('Nothing to undo', 'warn');
+      });
+      document.getElementById('redoBtn').addEventListener('click', function () {
+        if (!e.redo()) self.toast('Nothing to redo', 'warn');
+      });
+      document.getElementById('clearBtn').addEventListener('click', function () {
+        self.confirm('Clear the whole canvas?', function () {
+          e.clear(); self.toast('Canvas cleared, you can start fresh');
+        });
+      });
+      document.getElementById('newBtn').addEventListener('click', function () {
+        self.confirm('New canvas will clear current content (unsaved work will be lost). Continue?', function () {
+          e.clear();
+          self.activeLesson = null;
+          document.getElementById('currentLessonBadge').textContent = 'Free drawing';
+          document.getElementById('canvasTitleTip').textContent = 'Draw anything you like!';
+          self.toast('Fresh canvas ready!');
+        });
+      });
+      document.getElementById('gridBtn').addEventListener('click', function () {
+        var on = e.toggleGrid();
+        this.classList.toggle('on', on);
+        self.toast(on ? 'Grid on — the pink lines show the rule of thirds' : 'Grid off');
+      }.bind(document.getElementById('gridBtn')));
+      document.getElementById('mirrorBtn').addEventListener('click', function () {
+        e.setMirror(!e.mirror);
+        this.classList.toggle('on', e.mirror);
+        self.toast(e.mirror ? 'Mirror on — draw half, get a symmetric pattern!' : 'Mirror off');
+      }.bind(document.getElementById('mirrorBtn')));
+
+      // Save / export
+      document.getElementById('saveBtn').addEventListener('click', function () { self.saveWork(); });
+      document.getElementById('exportBtn').addEventListener('click', function () { self.exportImage(); });
+
+      // Reference image
+      document.getElementById('refFile').addEventListener('change', function (ev) {
+        var file = ev.target.files[0];
+        if (!file) return;
+        self.readFile(file, function (dataUrl) {
+          e.setReference(dataUrl);
+          document.getElementById('refControls').style.display = 'flex';
+          self.toast('Reference loaded — lower its opacity and trace along!');
+        });
+      });
+      document.getElementById('clearRefBtn').addEventListener('click', function () {
+        e.setReference(null);
+        document.getElementById('refControls').style.display = 'none';
+        document.getElementById('refFile').value = '';
+      });
+      var refOp = document.getElementById('refOpacitySlider');
+      refOp.addEventListener('input', function () { e.setRefOpacity(refOp.value / 100); });
+
+      // Right helper
+      document.getElementById('quickEvalBtn').addEventListener('click', function () { self.quickEval(); });
+      document.getElementById('quickTipBtn').addEventListener('click', function () {
+        var tips = window.ART_TIPS;
+        var tip = tips[Math.floor(Math.random() * tips.length)];
+        self.showAssistResult('✨', 'Inspiration tip', tip);
+      });
+      document.getElementById('quickGoCourseBtn').addEventListener('click', function () { self.switchTab('courses'); });
+    },
+
+    renderPalette: function () {
+      var colors = [
+        '#333333', '#ffffff', '#e74c3c', '#e67e22', '#f1c40f', '#2ecc71',
+        '#1abc9c', '#3498db', '#9b59b6', '#e84393', '#fd79a8', '#00cec9',
+        '#d35400', '#27ae60', '#2980b9', '#8e44ad', '#c0392b', '#7f8c8d'
+      ];
+      var self = this;
+      var box = document.getElementById('palette');
+      colors.forEach(function (c) {
+        var s = document.createElement('div');
+        s.className = 'swatch';
+        s.style.background = c;
+        s.dataset.color = c;
+        s.title = c;
+        s.addEventListener('click', function () {
+          self.engine.setColor(c);
+          document.getElementById('colorPicker').value = c;
+          document.getElementById('currentColorHex').textContent = c;
+          document.querySelectorAll('.palette .swatch').forEach(function (x) { x.classList.remove('active'); });
+          s.classList.add('active');
+          self.updateBrushInfo();
+        });
+        box.appendChild(s);
+      });
+    },
+
+    updateBrushInfo: function () {
+      var names = { pencil: 'Pencil', brush: 'Brush', marker: 'Marker', watercolor: 'Watercolor', spray: 'Airbrush', eraser: 'Eraser' };
+      var icons = { pencil: '✏️', brush: '🖌️', marker: '🖍️', watercolor: '💧', spray: '💨', eraser: '🧽' };
+      var t = this.engine.tool;
+      document.getElementById('brushInfo').innerHTML = '<b>' + names[t] + '</b> · Size ' + this.engine.size;
+    },
+
+    quickEval: function () {
+      if (this.engine.isEmpty()) { this.toast('Canvas is empty — draw something first, then score it', 'warn'); return; }
+      var r = window.AIAssistant.evaluateArtwork(this.engine.drawCanvas);
+      this.showAssistResult('⭐', 'Score: ' + r.overall + ' pts ' + '⭐'.repeat(r.stars),
+        r.praise + '<br><br>' + r.dimensions.map(function (d) {
+          return '· ' + d.name + '：' + d.score + ' pts';
+        }).join('<br>'));
+    },
+
+    showAssistResult: function (icon, title, html) {
+      var box = document.getElementById('assistResult');
+      box.style.display = 'block';
+      box.innerHTML = '<b>' + icon + ' ' + title + '</b><div style="margin-top:8px">' + html + '</div>';
+    },
+
+    /* ================= Courses page ================= */
+    renderCourses: function () {
+      var self = this;
+      var panel = document.getElementById('levelsPanel');
+      panel.innerHTML = '';
+      window.COURSE_DATA.levels.forEach(function (lv, li) {
+        var done = lv.lessons.filter(function (l) { return Progress.isCompleted(l.id); }).length;
+        var card = document.createElement('div');
+        card.className = 'level-card' + (li === 0 ? ' open' : '');
+        card.innerHTML =
+          '<div class="level-head">' +
+            '<span class="level-emoji">' + lv.emoji + '</span>' +
+            '<div class="level-info">' +
+              '<div class="level-name">' + lv.name + '</div>' +
+              '<div class="level-sub">' + lv.subtitle + '</div>' +
+              '<div class="level-progress">' + done + '/' + lv.lessons.length + '  lessons done</div>' +
+            '</div>' +
+            '<span class="level-arrow">▶</span>' +
+          '</div>' +
+          '<div class="level-lessons"></div>';
+        card.querySelector('.level-head').addEventListener('click', function () { card.classList.toggle('open'); });
+        var list = card.querySelector('.level-lessons');
+        lv.lessons.forEach(function (lesson) {
+          var item = document.createElement('div');
+          item.className = 'lesson-item' + (Progress.isCompleted(lesson.id) ? ' done' : '');
+          item.dataset.lesson = lesson.id;
+          item.innerHTML =
+            '<span class="li-emoji">' + lesson.emoji + '</span>' +
+            '<span>' + lesson.title + '</span>' +
+            '<span class="li-check">' + (Progress.isCompleted(lesson.id) ? '✅' : '') + '</span>' +
+            '<span class="li-stars">' + '★'.repeat(lesson.stars) + '</span>';
+          item.addEventListener('click', function () { self.openLesson(lesson, lv, item); });
+          list.appendChild(item);
+        });
+        panel.appendChild(card);
+      });
+      this.refreshCourseProgress();
+    },
+
+    openLesson: function (lesson, level, itemEl) {
+      var self = this;
+      document.querySelectorAll('.lesson-item').forEach(function (x) { x.classList.remove('active'); });
+      if (itemEl) itemEl.classList.add('active');
+      var done = Progress.isCompleted(lesson.id);
+      var html =
+        '<div class="lesson-header">' +
+          '<span class="lh-emoji">' + lesson.emoji + '</span>' +
+          '<div><h2>' + lesson.title + '</h2>' +
+          '<div class="lesson-meta"><span>' + level.emoji + ' ' + level.name + '</span><span>⏱ ' + lesson.duration + '</span><span style="color:var(--orange)">' + '★'.repeat(lesson.stars) + '</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="lesson-intro">' + lesson.intro + '</div>' +
+        '<div class="section-heading">Theory</div>' +
+        '<div class="theory-list">' + lesson.theory.map(function (t, i) {
+          return '<div class="theory-item"><span class="ti-num">' + (i + 1) + '</span><span>' + t + '</span></div>';
+        }).join('') + '</div>' +
+        '<div class="section-heading">Hands-on practice (step by step)</div>' +
+        '<div class="step-list">' + lesson.steps.map(function (s, i) {
+          return '<div class="step-item"><div class="step-num">' + (i + 1) + '</div><div class="step-body"><b>' + s.title + '</b><p>' + s.desc + '</p></div></div>';
+        }).join('') + '</div>' +
+        '<div class="task-box">' +
+          '<h4>Practice task: ' + lesson.task.title + '</h4>' +
+          '<p>' + lesson.task.desc + '</p>' +
+          '<p class="task-tip">Tip: ' + lesson.task.tip + '</p>' +
+        '</div>' +
+        '<div class="tips-box"><b>Quick tips</b><ul>' + lesson.tips.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>' +
+        '<div class="lesson-actions">' +
+          '<button class="start-draw-btn" id="startDrawLesson">Start drawing</button>' +
+          '<button class="complete-btn' + (done ? ' done' : '') + '" id="completeLesson">' + (done ? 'Done' : 'Mark as done') + '</button>' +
+        '</div>';
+
+      var lp = document.getElementById('lessonPanel');
+      lp.innerHTML = html;
+      lp.scrollTop = 0;
+
+      document.getElementById('startDrawLesson').addEventListener('click', function () {
+        self.startLessonDrawing(lesson);
+      });
+      document.getElementById('completeLesson').addEventListener('click', function () {
+        if (Progress.completeLesson(lesson.id)) {
+          self.toast('Completed "' + lesson.title + '"! +30 XP');
+          self.renderCourses();
+          self.openLesson(lesson, level, null);
+          self.checkAndShowBadges();
+          self.refreshUserBox();
+        } else {
+          self.toast('You already finished this lesson — keep it up!', 'warn');
+        }
+      });
+    },
+
+    startLessonDrawing: function (lesson) {
+      this.activeLesson = lesson;
+      document.getElementById('currentLessonBadge').textContent = lesson.title;
+      document.getElementById('canvasTitleTip').textContent = lesson.task.desc;
+      var hint = document.getElementById('courseHint');
+      hint.innerHTML = '<div class="hint-emoji">' + lesson.emoji + '</div>' +
+        '<h4>' + lesson.title + '</h4>' +
+        '<p><b>Task:</b> ' + lesson.task.desc + '<br><br><b>Tip:</b> ' + lesson.task.tip + '</p>';
+      this.switchTab('studio');
+      this.toast('Practice "' + lesson.title + '" started — you got this!');
+    },
+
+    refreshCourseProgress: function () {
+      var pct = Progress.progressPercent();
+      document.getElementById('courseProgressNum').textContent = pct + '%';
+    },
+
+    /* ================= Practice ================= */
+    renderPractice: function () {
+      var self = this;
+      var practices = [
+        { icon: '🖼️', title: 'Tracing', desc: 'Upload a favorite image as a reference, lower its opacity, and trace it to sharpen observation.', color: '#FF6B9D', action: 'trace' },
+        { icon: '▦', title: 'Grid practice', desc: 'Turn on the grid and thirds lines to place objects accurately and master proportions.', color: '#4ECDC4', action: 'grid' },
+        { icon: '🪞', title: 'Symmetry', desc: 'Turn on mirror mode: draw half, get symmetry. Try butterflies and masks!', color: '#A29BFE', action: 'mirror' },
+        { icon: '🌈', title: 'Color challenge', desc: 'Generate a palette in AI Helper and use it to finish a picture.', color: '#FF9F43', action: 'color' },
+        { icon: '⚡', title: 'Quick sketch', desc: 'Pick an object nearby and capture its features in 5 minutes.', color: '#26de81', action: 'sketch' },
+        { icon: '🖊️', title: 'Photo to line art', desc: 'Turn a photo into line art with AI, study the outline, then trace it.', color: '#F9CA24', action: 'lineart' }
+      ];
+      var grid = document.getElementById('practiceGrid');
+      grid.innerHTML = '';
+      practices.forEach(function (p) {
+        var card = document.createElement('div');
+        card.className = 'practice-card';
+        card.style.setProperty('--pc', p.color);
+        card.innerHTML =
+          '<div class="pc-icon">' + p.icon + '</div>' +
+          '<h3>' + p.title + '</h3>' +
+          '<p>' + p.desc + '</p>' +
+          '<button class="pc-btn">Start practice →</button>';
+        card.querySelector('.pc-btn').addEventListener('click', function () {
+          self.startPractice(p);
+        });
+        grid.appendChild(card);
+      });
+    },
+
+    startPractice: function (p) {
+      var self = this;
+      this.activeLesson = null;
+      document.getElementById('currentLessonBadge').textContent = p.title;
+      document.getElementById('canvasTitleTip').textContent = p.desc;
+      this.switchTab('studio');
+
+      if (p.action === 'grid') {
+        this.engine.toggleGrid(true);
+        document.getElementById('gridBtn').classList.add('on');
+        this.toast('Grid and thirds on — start positioning practice!');
+      } else if (p.action === 'mirror') {
+        this.engine.setMirror(true);
+        document.getElementById('mirrorBtn').classList.add('on');
+        this.toast('Mirror on — see the magic of symmetry!');
+      } else if (p.action === 'trace') {
+        document.getElementById('refFile').click();
+        this.toast('Choose an image as your tracing reference');
+      } else if (p.action === 'color' || p.action === 'lineart') {
+        this.switchTab('ai');
+        var id = p.action === 'color' ? 'schemeBaseColor' : 'lineArtBtn';
+        var el = document.getElementById(id);
+        el && el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        this.toast(p.action === 'color' ? 'Pick a base color to generate a palette' : 'Upload a photo to extract line art');
+      } else {
+        this.toast('Timer started! Capture the object’s features in 5 minutes.');
+      }
+    },
+
+    /* ================= Gallery ================= */
+    bindGallery: function () {
+      // Delegate delete button binding
+      var self = this;
+      document.getElementById('galleryGrid').addEventListener('click', function (ev) {
+        var del = ev.target.closest('.work-del');
+        if (del) {
+          var id = del.dataset.id;
+          self.confirm('Delete this artwork? This can’t be undone.', function () {
+            Progress.removeWork(id);
+            self.renderGallery();
+            self.toast('Artwork deleted');
+          });
+          return;
+        }
+        var img = ev.target.closest('.work-img');
+        if (img) self.openWorkModal(img.dataset.id);
+      });
+    },
+
+    renderGallery: function () {
+      var works = Progress.getWorks();
+      var grid = document.getElementById('galleryGrid');
+      var stats = document.getElementById('galleryStats');
+      stats.innerHTML = 'Total <b>' + works.length + '</b> artworks · <b>' + Progress.get().drawCount + '</b> drawings';
+      if (works.length === 0) {
+        grid.innerHTML = '<div class="work-empty"><div class="we-icon">🖼️</div><h3>Your gallery is empty</h3><p>Draw something in the Studio and save it — it will appear here!</p><button class="start-draw-btn" onclick="window.__app.switchTab(\'studio\')">Start drawing</button></div>';
+        return;
+      }
+      grid.innerHTML = '';
+      works.forEach(function (w) {
+        var card = document.createElement('div');
+        card.className = 'work-card';
+        var date = new Date(w.time);
+        var dateStr = (date.getMonth() + 1) + '/' + date.getDate() + ' ' + date.getHours() + ':' + String(date.getMinutes()).padStart(2, '0');
+        card.innerHTML =
+          '<img class="work-img" src="' + w.data + '" alt="' + this.esc(w.title) + '" data-id="' + w.id + '">' +
+          '<div class="work-info">' +
+            '<div class="work-title">' + this.esc(w.title) + '</div>' +
+            '<div class="work-meta"><span>' + this.esc(w.course) + ' · ' + dateStr + '</span>' +
+            '<span><span class="work-stars">' + '★'.repeat(w.stars || 0) + '</span> ' +
+            '<button class="work-del" data-id="' + w.id + '" title="Delete">🗑</button></span></div>' +
+          '</div>';
+        grid.appendChild(card);
+      }, this);
+    },
+
+    openWorkModal: function (id) {
+      var w = Progress.getWorks().find(function (x) { return x.id === id; });
+      if (!w) return;
+      var date = new Date(w.time).toLocaleString('zh-CN');
+      this.showModal(
+        '<h2>' + this.esc(w.title) + '</h2>' +
+        '<img src="' + w.data + '" alt="Artwork">' +
+        '<p style="color:var(--muted);font-size:13px;margin-top:14px">Course: ' + this.esc(w.course) + ' · Created: ' + date + ' · ' + '★'.repeat(w.stars || 0) + '</p>' +
+        '<button class="start-draw-btn" id="loadToCanvas">Load to canvas</button>'
+      );
+      var self = this;
+      document.getElementById('loadToCanvas').addEventListener('click', function () {
+        self.engine.loadImage(w.data, function () { self.closeModal(); self.switchTab('studio'); self.toast('Artwork loaded to canvas'); });
+      });
+    },
+
+    /* ================= Save / export ================= */
+    saveWork: function () {
+      var self = this;
+      if (this.engine.isEmpty()) { this.toast('Canvas is empty — draw something first, then save', 'warn'); return; }
+      var full = this.engine.exportPNG();
+      var course = this.activeLesson ? this.activeLesson.title : 'Free drawing';
+      var defaultTitle = this.activeLesson ? this.activeLesson.title + ' · My artwork' : 'My drawing ' + new Date().toLocaleDateString('zh-CN');
+      var title = window.prompt('Name your artwork:', defaultTitle);
+      if (title === null) return;
+      title = title.trim() || defaultTitle;
+      Progress.compressImage(full, 700, 0.85).then(function (compressed) {
+        var r = AIAssistant.evaluateArtwork(self.engine.drawCanvas);
+        Progress.addWork(self.esc(title), compressed, course, r.stars);
+        self.toast('Saved "' + title + '" to your gallery!');
+        self.checkAndShowBadges();
+        self.refreshUserBox();
+      });
+    },
+
+    exportImage: function () {
+      if (this.engine.isEmpty()) { this.toast('Canvas is empty — nothing to export', 'warn'); return; }
+      var data = this.engine.exportPNG();
+      var a = document.createElement('a');
+      a.href = data;
+      a.download = 'My_drawing_' + Date.now() + '.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      this.toast('Image exported to downloads');
+    },
+
+    /* ================= AI page ================= */
+    bindAI: function () {
+      var self = this;
+
+      // Photo to line art
+      document.getElementById('lineArtBtn').addEventListener('click', function () {
+        document.getElementById('lineArtFile').click();
+      });
+      document.getElementById('lineArtFile').addEventListener('change', function (ev) {
+        var file = ev.target.files[0];
+        if (!file) return;
+        self.readFile(file, function (dataUrl) {
+          var img = new Image();
+          img.onload = function () {
+            var c = document.createElement('canvas');
+            // limit size to avoid freezing
+            var scale = Math.min(1, 900 / Math.max(img.width, img.height));
+            c.width = Math.round(img.width * scale);
+            c.height = Math.round(img.height * scale);
+            c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+            var line = AIAssistant.toLineArt(c, 1.2);
+            self.lineArtData = line;
+            var out = document.getElementById('lineArtOutput');
+            out.innerHTML = '<img class="lineart-preview" src="' + line + '" alt="Line art preview">' +
+              '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">' +
+              '<button class="ai-btn" id="lineAsRef">Set as reference</button>' +
+              '<button class="ai-btn" id="lineToCanvas" style="background:var(--orange)">Load to canvas</button>' +
+              '</div>';
+            document.getElementById('lineAsRef').addEventListener('click', function () {
+              self.engine.setReference(line);
+              document.getElementById('refControls').style.display = 'flex';
+              self.switchTab('studio');
+              self.toast('Line art set as reference — trace along!');
+            });
+            document.getElementById('lineToCanvas').addEventListener('click', function () {
+              self.engine.loadImage(line, function () {
+                self.switchTab('studio');
+                self.toast('Line art loaded — color it in!');
+              });
+            });
+          };
+          img.src = dataUrl;
+        });
+      });
+
+      // Color analysis
+      document.getElementById('colorAnalyzeBtn').addEventListener('click', function () {
+        if (self.engine.isEmpty()) { self.toast('Draw something on the canvas first', 'warn'); return; }
+        var r = AIAssistant.analyzeColors(self.engine.drawCanvas);
+        var html = '<div class="ai-result-box">';
+        html += '<b>Main colors:</b><div class="color-swatch-row">' +
+          r.topColors.map(function (c) {
+            return '<div style="text-align:center"><div class="color-chip" style="background:' + c.hex + '"></div>' +
+              '<div style="font-size:10px;color:var(--muted);margin-top:3px">' + c.name + ' ' + c.percent + '%</div></div>';
+          }).join('') + '</div>';
+        html += '<div class="bar-pair"><span>Warm</span><div class="bar-track"><div class="bar-fill" style="width:' + r.warm + '%;background:#ff7675"></div></div><span>' + r.warm + '%</span></div>';
+        html += '<div class="bar-pair"><span>Cool</span><div class="bar-track"><div class="bar-fill" style="width:' + r.cool + '%;background:#74b9ff"></div></div><span>' + r.cool + '%</span></div>';
+        html += '<div class="bar-pair"><span>Richness</span><div class="bar-track"><div class="bar-fill" style="width:' + r.richness + '%;background:#55efc4"></div></div><span>' + r.richness + '%</span></div>';
+        html += '<p style="margin:10px 0 0;color:var(--muted)">' + (r.richness > 60 ? 'Rich colors — full of energy!' : 'Try a few more colors to make it more colorful.') + '</p>';
+        html += '</div>';
+        document.getElementById('colorOutput').innerHTML = html;
+      });
+
+      // Composition analysis
+      document.getElementById('compAnalyzeBtn').addEventListener('click', function () {
+        if (self.engine.isEmpty()) { self.toast('Draw something on the canvas first', 'warn'); return; }
+        var r = AIAssistant.analyzeComposition(self.engine.drawCanvas);
+        var html = '<div class="ai-result-box"><b>Visual weight across the 3x3 grid:</b>';
+        r.grid.forEach(function (row) {
+          html += '<div style="display:flex;gap:3px;margin-top:4px">' + row.map(function (v) {
+            return '<div style="flex:1;background:rgba(255,107,157,' + (0.12 + v / 100) + ');border-radius:4px;padding:5px;text-align:center;font-size:10px">' + v + '%</div>';
+          }).join('') + '</div>';
+        });
+        html += '<p style="margin:12px 0 0">' + r.suggestion + '</p>';
+        html += '<p style="color:var(--muted);font-size:11px">Balance: ' + r.balance + '/100</p></div>';
+        document.getElementById('compOutput').innerHTML = html;
+      });
+
+      // Smart palette
+      document.getElementById('schemeBtn').addEventListener('click', function () {
+        var base = document.getElementById('schemeBaseColor').value;
+        var schemes = AIAssistant.colorSchemes(base);
+        var html = '';
+        schemes.forEach(function (s) {
+          html += '<div style="margin-bottom:12px"><b>' + s.name + '</b> <span style="color:var(--muted);font-size:11px">' + s.desc + '</span>' +
+            '<div class="color-swatch-row">' + s.colors.map(function (c) {
+              return '<div class="color-chip" style="background:' + c + '" title="' + c + '"></div>';
+            }).join('') + '</div></div>';
+        });
+        document.getElementById('schemeOutput').innerHTML = '<div class="ai-result-box">' + html + '</div>';
+      });
+
+      // Artwork scoring
+      document.getElementById('evalBtn').addEventListener('click', function () { self.fullEval(); });
+    },
+
+    fullEval: function () {
+      if (this.engine.isEmpty()) { this.toast('Draw something on the canvas first', 'warn'); return; }
+      var r = AIAssistant.evaluateArtwork(this.engine.drawCanvas);
+      var html = '<div class="ai-result-box"><div class="score-big"><span class="score-num">' + r.overall + '</span><span class="score-praise">' + r.praise + '</span><span style="color:var(--orange)">' + '⭐'.repeat(r.stars) + '</span></div>';
+      r.dimensions.forEach(function (d) {
+        html += '<div class="score-dim"><div class="score-dim-head"><span>' + d.name + '</span><span>' + d.score + ' pts</span></div>' +
+          '<div class="dim-bar"><div class="dim-bar-fill" style="width:' + d.score + '%"></div></div>' +
+          '<div class="score-dim-tip">' + d.tip + '</div></div>';
+      });
+      html += '</div>';
+      document.getElementById('evalOutput').innerHTML = html;
+    },
+
+    /* ================= Progress ================= */
+    bindProfile: function () { this.renderProfile(); },
+    renderProfile: function () {
+      var p = Progress.get();
+      var stats = [
+        { icon: '📚', num: p.completed.length + '/' + window.COURSE_STATS.lessons, label: 'Lessons' },
+        { icon: '🖼️', num: p.works.length, label: 'Saved works' },
+        { icon: '🎨', num: p.drawCount, label: 'Drawings' },
+        { icon: '⭐', num: 'Lv.' + Progress.level(), label: 'Level' },
+        { icon: '✨', num: p.exp, label: 'Total XP' },
+        { icon: '🏆', num: p.badges.length + '/' + Progress.getBadges().length, label: 'Badges' }
+      ];
+      document.getElementById('profileStats').innerHTML = stats.map(function (s) {
+        return '<div class="stat-card"><div class="stat-icon">' + s.icon + '</div><div class="stat-num">' + s.num + '</div><div class="stat-label">' + s.label + '</div></div>';
+      }).join('');
+
+      document.getElementById('badgesGrid').innerHTML = Progress.getBadges().map(function (b) {
+        var earned = Progress.hasBadge(b.id);
+        return '<div class="badge-item' + (earned ? ' earned' : '') + '"><div class="b-emoji">' + b.emoji + '</div>' +
+          '<div class="b-name">' + b.name + '</div><div class="b-desc">' + b.desc + '</div></div>';
+      }).join('');
+    },
+
+    /* ================= Utilities ================= */
+    refreshUserBox: function () {
+      var lv = Progress.level();
+      document.getElementById('levelCircle').textContent = 'Lv.' + lv;
+      document.getElementById('expLevelText').textContent = 'Lv.' + lv + ' ' + (lv >= 5 ? 'Master Artist' : lv >= 3 ? 'Young Artist' : 'Apprentice');
+      document.getElementById('expNumText').textContent = Progress.expInLevel() + '/' + Progress.expNeeded();
+      document.getElementById('expFill').style.width = Math.round(Progress.expInLevel() / Progress.expNeeded() * 100) + '%';
+    },
+
+    checkAndShowBadges: function () {
+      var self = this;
+      var badges = Progress.getNewBadges();
+      badges.forEach(function (b, i) {
+        setTimeout(function () { self.toast('New badge unlocked: ' + b.name + '！' + b.desc, 'badge'); }, i * 400);
+      });
+    },
+
+    readFile: function (file, cb) {
+      var r = new FileReader();
+      r.onload = function () { cb(r.result); };
+      r.readAsDataURL(file);
+    },
+
+    toast: function (msg, type) {
+      var box = document.getElementById('toastContainer');
+      var t = document.createElement('div');
+      t.className = 'toast' + (type ? ' ' + type : '');
+      t.textContent = msg;
+      box.appendChild(t);
+      setTimeout(function () { t.style.opacity = '0'; t.style.transition = 'opacity .3s'; setTimeout(function () { t.remove(); }, 300); }, 3200);
+    },
+
+    confirm: function (msg, onYes) {
+      this.showModal('<h3>Please confirm</h3><p style="color:var(--muted);line-height:1.7">' + msg + '</p>' +
+        '<div style="display:flex;gap:10px;margin-top:18px"><button class="start-draw-btn" id="confirmYes">Confirm</button>' +
+        '<button class="big-secondary-btn" id="confirmNo" style="margin:0">Cancel</button></div>');
+      var self = this;
+      document.getElementById('confirmYes').addEventListener('click', function () { self.closeModal(); onYes(); });
+      document.getElementById('confirmNo').addEventListener('click', function () { self.closeModal(); });
+    },
+
+    showModal: function (html) {
+      document.getElementById('modalContent').innerHTML = html;
+      document.getElementById('modalBackdrop').style.display = 'grid';
+    },
+    closeModal: function () { document.getElementById('modalBackdrop').style.display = 'none'; },
+
+    esc: function (s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    },
+
+    onKey: function (e) {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        if (e.shiftKey) this.engine.redo(); else this.engine.undo();
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') { e.preventDefault(); this.engine.redo(); }
+      if (e.key === 'Escape') this.closeModal();
+    }
+  };
+
+  global.__app = App;
+  document.addEventListener('DOMContentLoaded', function () { App.init(); });
+
+})(window);
+
+
+/* ============================================================
+ * Drawing Master · Privacy Policy & compliance helpers
+ * Zero-data design: everything runs locally, nothing is uploaded.
+ * ============================================================ */
+(function () {
+  'use strict';
+
+  var PRIVACY_HTML = [
+    '<h2>Privacy Policy</h2>',
+    '<div class="pm-date">Last updated: ' + new Date().getFullYear() + '-01-01</div>',
+    '<p>Drawing Master ("we", "the App") is a creative drawing and art-learning tool designed for children and families. We take children’s privacy extremely seriously. This policy explains, in plain language, what the App does with data.</p>',
+
+    '<h3>1. The short version</h3>',
+    '<p><b>We collect no personal data, we show no ads, we use no trackers, and nothing you draw ever leaves your device.</b> The App works fully offline. There are no accounts, no sign-in, and no analytics.</p>',
+
+    '<h3>2. What stays on your device</h3>',
+    '<p>The App saves your learning progress and saved artworks in your browser’s local storage (<code>localStorage</code>) on your own device. This includes:</p>',
+    '<ul>',
+    '<li>completed lessons and learning progress;</li>',
+    '<li>artworks you choose to save (stored as compressed images);</li>',
+    '<li>experience points, levels, and earned badges.</li>',
+    '</ul>',
+    '<p>This information never transmitted to us or any server. You can delete it at any time by clearing your browser’s site data, or by using the reset option in the App.</p>',
+
+    '<h3>3. No accounts, no personal information</h3>',
+    '<p>Children do not need to enter a name, email, birthday, or any other personal information to use the App. We do not ask for, receive, or store a child’s personal information. We do not use photos, microphones, cameras, or location.</p>',
+
+    '<h3>4. No advertising, no third-party SDKs</h3>',
+    '<p>The App contains no advertising of any kind, no advertising identifiers, no behavioral tracking, no analytics frameworks, and no third-party tracking SDKs. We do not sell or share any data with third parties. We do not use any data for targeted advertising.</p>',
+
+    '<h3>5. Open-source algorithms, on-device</h3>',
+    '<p>The AI Helper features (line-art extraction, color analysis, composition analysis, smart palettes, and artwork scoring) are implemented with classic open-source computer-vision ideas that run entirely in your browser on your device. Images you process in these features are not uploaded anywhere.</p>',
+
+    '<h3>6. Internet access</h3>',
+    '<p>The App needs no internet connection to function. It makes no network requests. All code, styles, and algorithms are bundled into a single file.</p>',
+
+    '<h3>7. Parents and guardians</h3>',
+    '<p>If you are a parent or guardian and have any question about the App, please contact us using the address below. Because we do not collect any personal data, there is nothing for us to review, delete, or disclose — your family’s data stays entirely on your device, under your control.</p>',
+
+    '<h3>8. Compliance</h3>',
+    '<p>This App is designed with the US Children’s Online Privacy Protection Act (COPPA), the EU GDPR (including provisions for children), and similar child-protection frameworks in mind. It is built as a no-data-collection product, which is the strongest way to protect young users.</p>',
+
+    '<h3>9. Changes</h3>',
+    '<p>If we ever change this policy, we will update the date above. Since the App collects nothing, any change would only make this policy clearer.</p>',
+
+    '<h3>10. Contact</h3>',
+    '<p>For questions about this privacy policy, please contact: <a id="pmEmail" href="mailto:privacy@example.com">privacy@example.com</a></p>'
+  ].join('\n');
+
+  function bind() {
+    var yearEl = document.getElementById('footYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    var btn = document.getElementById('privacyBtn');
+    var back = document.getElementById('privacyBackdrop');
+    var close = document.getElementById('privacyClose');
+    var content = document.getElementById('privacyContent');
+    if (!btn || !back || !content) return;
+
+    content.innerHTML = PRIVACY_HTML;
+    btn.addEventListener('click', function () { back.style.display = 'grid'; });
+    if (close) close.addEventListener('click', function () { back.style.display = 'none'; });
+    back.addEventListener('click', function (e) { if (e.target === back) back.style.display = 'none'; });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') back.style.display = 'none';
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+
+
+/* ============================================================
+ * Drawing Master · Parent Gate
+ * A simple grown-up check before showing purchase / external links.
+ * This keeps kids away from payment links (Apple Kids / Google Families).
+ * No data is collected — the check is a local math question only.
+ * ============================================================ */
+(function () {
+  'use strict';
+
+  // >>> Replace with your subscribe page URL (deployed GitHub Pages / custom domain) <<<
+  var SUBSCRIBE_URL = 'subscribe.html';
+
+  function bind() {
+    var btn = document.getElementById('parentGateBtn');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      var a = Math.floor(Math.random() * 6) + 3; // 3..8
+      var b = Math.floor(Math.random() * 6) + 3; // 3..8
+      var answer = a + b;
+      var html =
+        '<h3>Grown-ups only</h3>' +
+        '<p style="color:var(--muted);line-height:1.7;font-size:13px">' +
+        'This area is for parents. Please solve this to continue:</p>' +
+        '<div style="font-size:26px;font-weight:800;text-align:center;margin:18px 0;color:var(--brand)">' +
+        a + ' + ' + b + ' = ?</div>' +
+        '<input id="gateAnswer" type="number" inputmode="numeric" placeholder="Your answer" ' +
+        'style="width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font-size:15px;text-align:center">' +
+        '<div style="display:flex;gap:10px;margin-top:16px">' +
+        '<button class="start-draw-btn" id="gateGo" style="flex:1;justify-content:center">Continue</button>' +
+        '<button class="big-secondary-btn" id="gateCancel" style="margin:0;flex:1">Cancel</button>' +
+        '</div>' +
+        '<p id="gateErr" style="color:#e0455e;font-size:12px;text-align:center;margin-top:10px;min-height:16px"></p>';
+
+      // reuse app showModal / closeModal (global __app)
+      var app = window.__app;
+      if (!app) return;
+      app.showModal(html);
+
+      var input = document.getElementById('gateAnswer');
+      var go = document.getElementById('gateGo');
+      var cancel = document.getElementById('gateCancel');
+      var err = document.getElementById('gateErr');
+
+      function submit() {
+        if (parseInt(input.value, 10) === answer) {
+          app.closeModal();
+          // parent verified -> open subscribe page (new tab)
+          window.open(SUBSCRIBE_URL, '_blank', 'noopener');
+        } else {
+          err.textContent = 'Not quite — please try again.';
+          input.value = '';
+          input.focus();
+        }
+      }
+      go.addEventListener('click', submit);
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') submit(); });
+      cancel.addEventListener('click', function () { app.closeModal(); });
+      setTimeout(function () { input.focus(); }, 50);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+})();
+
+</script>
+</body>
+</html>
