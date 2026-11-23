@@ -104,10 +104,6 @@
     <img src="app_screens.png" alt="Drawing Master app - drawing studio, lessons and AI feedback">
   </div>
 
-  <div class="note">
-    <b>Demo page:</b> The buttons below point to a placeholder link. Replace <code>YOUR_GUMROAD_LINK</code> with your real Gumroad / Lemon Squeezy product URL before going live. See the deployment guide for step-by-step instructions.
-  </div>
-
   <section class="pricing" id="pricing">
     <!-- 免费版 -->
     <div class="plan">
@@ -132,8 +128,8 @@
       <div class="pdesc">Flexible, cancel anytime.</div>
       <div class="price">$3.9<small>/mo</small></div>
       <div class="per">Billed monthly</div>
-      <!-- ↓↓↓ 替换成你的收款链接 ↓↓↓ -->
-      <a class="btn btn-solid" href="https://YOUR_GUMROAD_LINK/monthly" target="_blank" rel="noopener">Subscribe Monthly</a>
+      <!-- 购买按钮：链接在文件底部 PAYMENT LINKS 处统一配置 -->
+      <a class="btn btn-solid" id="btn-monthly" href="https://creem.io/payment/prod_REPLACE_MONTHLY" target="_blank" rel="noopener">Subscribe Monthly</a>
       <ul class="feats">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Everything in Starter</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> All 25 lessons, 5 stages</li>
@@ -150,8 +146,8 @@
       <div class="pdesc">Pay once, yours forever.</div>
       <div class="price">$19<span class="old">$39</span></div>
       <div class="per">One-time payment · Save 50%</div>
-      <!-- ↓↓↓ 替换成你的收款链接 ↓↓↓ -->
-      <a class="btn btn-brand" href="https://YOUR_GUMROAD_LINK/lifetime" target="_blank" rel="noopener">Get Lifetime Access</a>
+      <!-- 购买按钮：链接在文件底部 PAYMENT LINKS 处统一配置 -->
+      <a class="btn btn-brand" id="btn-lifetime" href="https://creem.io/payment/prod_REPLACE_LIFETIME" target="_blank" rel="noopener">Get Lifetime Access</a>
       <ul class="feats">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Everything in Monthly</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m20 6-11 11-5-5"/></svg> Pay once, keep forever</li>
@@ -180,15 +176,34 @@
   <section class="bottom">
     <h2>Ready to start the art journey?</h2>
     <p>One payment. A complete art education. A child who loves to create.</p>
-    <!-- ↓↓↓ 替换成你的收款链接 ↓↓↓ -->
-    <a class="btn btn-brand" href="https://YOUR_GUMROAD_LINK/lifetime" target="_blank" rel="noopener">Get Lifetime Access - $19</a>
+    <!-- 购买按钮：链接在文件底部 PAYMENT LINKS 处统一配置 -->
+    <a class="btn btn-brand" id="btn-bottom" href="https://creem.io/payment/prod_REPLACE_LIFETIME" target="_blank" rel="noopener">Get Lifetime Access - $19</a>
   </section>
 
   <footer>
     © <span id="y"></span> Drawing Master · Made for families, everywhere.
-    <div style="margin-top:10px"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:support@example.com">Contact</a></div>
+    <div style="margin-top:10px"><a href="privacy.html">Privacy Policy</a> · <a href="mailto:wise.ok@163.com">Contact</a></div>
   </footer>
 </div>
-<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+/* ================================================================
+   PAYMENT LINKS —— 只改这两行！
+   在 Creem 后台创建两个产品后，把各自的付款链接粘贴到引号里。
+   链接形如： https://creem.io/payment/prod_xxxxxxxx
+   - MONTHLY  = 月付产品 $3.9
+   - LIFETIME = 终身产品 $19
+   改完保存并重新上传到 GitHub，三个按钮会全部自动更新。
+   ================================================================ */
+var CREEM_MONTHLY_URL  = 'https://creem.io/payment/prod_REPLACE_MONTHLY';
+var CREEM_LIFETIME_URL = 'https://creem.io/payment/prod_REPLACE_LIFETIME';
+
+// 把配置好的链接套用到三个按钮（无需改动按钮本身）
+function setLink(id,url){var el=document.getElementById(id);if(el)el.href=url;}
+setLink('btn-monthly', CREEM_MONTHLY_URL);
+setLink('btn-lifetime', CREEM_LIFETIME_URL);
+setLink('btn-bottom',   CREEM_LIFETIME_URL);
+
+document.getElementById('y').textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
